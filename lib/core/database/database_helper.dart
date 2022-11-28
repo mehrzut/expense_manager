@@ -51,9 +51,12 @@ class DataBaseHelper {
   Future<ExpenseEntity?> getExpense(int expenseId) =>
       _expensesTable.getById(_db, expenseId);
 
-  Future<void> insertExpense(ExpenseEntity expense) => _expensesTable.insert(_db, expense);
+  Future<void> insertExpense(ExpenseEntity expense) =>
+      _expensesTable.insert(_db, expense);
 
-  Future<void> deleteExpense(ExpenseEntity expense) => _expensesTable.delete(_db, expense);
-  
-  Future<void> updateExpense(ExpenseEntity expense) => _expensesTable.update(_db, expense);
+  Future<void> deleteExpense(ExpenseEntity expense) =>
+      _expensesTable.delete(_db, expense);
+
+  Future<void> updateExpense(ExpenseEntity expense) =>
+      _expensesTable.update(_db, expense);
 }
