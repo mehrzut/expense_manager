@@ -1,11 +1,13 @@
 import 'package:expense_manager/core/database/users_table.dart';
 import 'package:expense_manager/features/expenses/domain/entities/expense_entity.dart';
 import 'package:expense_manager/features/users/domain/entities/user_entity.dart';
+import 'package:injectable/injectable.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'database_table.dart';
 import 'expenses_table.dart';
 
+@singleton
 class DataBaseHelper {
   static const _dbName = 'expense_manager.db';
 
