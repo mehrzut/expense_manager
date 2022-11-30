@@ -12,7 +12,7 @@ abstract class ExpenseEntity with _$ExpenseEntity {
     required String description,
     required double price,
     required String currency,
-    required String otherEnd,
+    String? otherEnd,
     required ExpenseType expenseType,
     @Default(0)
     int isPaid

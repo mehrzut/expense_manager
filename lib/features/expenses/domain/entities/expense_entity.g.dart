@@ -12,7 +12,7 @@ _$_ExpenseEntity _$$_ExpenseEntityFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String,
       price: (json['price'] as num).toDouble(),
       currency: json['currency'] as String,
-      otherEnd: json['otherEnd'] as String,
+      otherEnd: json['otherEnd'] as String?,
       expenseType: $enumDecode(_$ExpenseTypeEnumMap, json['expenseType']),
       isPaid: json['isPaid'] as int? ?? 0,
     );

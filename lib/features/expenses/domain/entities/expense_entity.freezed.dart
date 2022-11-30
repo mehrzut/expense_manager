@@ -24,7 +24,7 @@ mixin _$ExpenseEntity {
   String get description => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
   String get currency => throw _privateConstructorUsedError;
-  String get otherEnd => throw _privateConstructorUsedError;
+  String? get otherEnd => throw _privateConstructorUsedError;
   ExpenseType get expenseType => throw _privateConstructorUsedError;
   int get isPaid => throw _privateConstructorUsedError;
 
@@ -45,7 +45,7 @@ abstract class $ExpenseEntityCopyWith<$Res> {
       String description,
       double price,
       String currency,
-      String otherEnd,
+      String? otherEnd,
       ExpenseType expenseType,
       int isPaid});
 }
@@ -67,7 +67,7 @@ class _$ExpenseEntityCopyWithImpl<$Res, $Val extends ExpenseEntity>
     Object? description = null,
     Object? price = null,
     Object? currency = null,
-    Object? otherEnd = null,
+    Object? otherEnd = freezed,
     Object? expenseType = null,
     Object? isPaid = null,
   }) {
@@ -88,10 +88,10 @@ class _$ExpenseEntityCopyWithImpl<$Res, $Val extends ExpenseEntity>
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String,
-      otherEnd: null == otherEnd
+      otherEnd: freezed == otherEnd
           ? _value.otherEnd
           : otherEnd // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       expenseType: null == expenseType
           ? _value.expenseType
           : expenseType // ignore: cast_nullable_to_non_nullable
@@ -117,7 +117,7 @@ abstract class _$$_ExpenseEntityCopyWith<$Res>
       String description,
       double price,
       String currency,
-      String otherEnd,
+      String? otherEnd,
       ExpenseType expenseType,
       int isPaid});
 }
@@ -137,7 +137,7 @@ class __$$_ExpenseEntityCopyWithImpl<$Res>
     Object? description = null,
     Object? price = null,
     Object? currency = null,
-    Object? otherEnd = null,
+    Object? otherEnd = freezed,
     Object? expenseType = null,
     Object? isPaid = null,
   }) {
@@ -158,10 +158,10 @@ class __$$_ExpenseEntityCopyWithImpl<$Res>
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String,
-      otherEnd: null == otherEnd
+      otherEnd: freezed == otherEnd
           ? _value.otherEnd
           : otherEnd // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       expenseType: null == expenseType
           ? _value.expenseType
           : expenseType // ignore: cast_nullable_to_non_nullable
@@ -182,7 +182,7 @@ class _$_ExpenseEntity implements _ExpenseEntity {
       required this.description,
       required this.price,
       required this.currency,
-      required this.otherEnd,
+      this.otherEnd,
       required this.expenseType,
       this.isPaid = 0});
 
@@ -198,7 +198,7 @@ class _$_ExpenseEntity implements _ExpenseEntity {
   @override
   final String currency;
   @override
-  final String otherEnd;
+  final String? otherEnd;
   @override
   final ExpenseType expenseType;
   @override
@@ -253,7 +253,7 @@ abstract class _ExpenseEntity implements ExpenseEntity {
       required final String description,
       required final double price,
       required final String currency,
-      required final String otherEnd,
+      final String? otherEnd,
       required final ExpenseType expenseType,
       final int isPaid}) = _$_ExpenseEntity;
 
@@ -269,7 +269,7 @@ abstract class _ExpenseEntity implements ExpenseEntity {
   @override
   String get currency;
   @override
-  String get otherEnd;
+  String? get otherEnd;
   @override
   ExpenseType get expenseType;
   @override

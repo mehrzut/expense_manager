@@ -19,15 +19,15 @@ import 'package:expense_manager/features/expenses/domain/usecases/create_expense
 import 'package:expense_manager/features/expenses/domain/usecases/get_active_expenses.dart'
     as _i8;
 import 'package:expense_manager/features/expenses/domain/usecases/update_expense.dart'
-    as _i9;
-import 'package:expense_manager/features/people/data/datasources/person_data_source.dart'
-    as _i10;
-import 'package:expense_manager/features/people/data/datasources/person_data_source_impl.dart'
-    as _i11;
-import 'package:expense_manager/features/people/data/repositories/person_repository_impl.dart'
     as _i13;
-import 'package:expense_manager/features/people/domain/repositories/person_repository.dart'
+import 'package:expense_manager/features/people/data/datasources/person_data_source.dart'
+    as _i9;
+import 'package:expense_manager/features/people/data/datasources/person_data_source_impl.dart'
+    as _i10;
+import 'package:expense_manager/features/people/data/repositories/person_repository_impl.dart'
     as _i12;
+import 'package:expense_manager/features/people/domain/repositories/person_repository.dart'
+    as _i11;
 import 'package:expense_manager/features/people/domain/usecases/create_person.dart'
     as _i15;
 import 'package:expense_manager/features/people/domain/usecases/get_all_people.dart'
@@ -55,18 +55,18 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i7.ExpenseRepositoryImpl(gh<_i4.ExpenseDataSource>()));
     gh.singleton<_i8.GetActiveExpenses>(
         _i8.GetActiveExpenses(gh<_i6.ExpenseRepository>()));
-    gh.singleton<_i9.UpdateExpense>(
-        _i9.UpdateExpense(gh<_i6.ExpenseRepository>()));
-    gh.lazySingleton<_i10.PersonDataSource>(
-        () => _i11.PersonDataSourceImpl(gh<_i3.DataBaseHelper>()));
-    gh.lazySingleton<_i12.PersonRepository>(
-        () => _i13.PersonRepositoryImpl(gh<_i10.PersonDataSource>()));
+    gh.lazySingleton<_i9.PersonDataSource>(
+        () => _i10.PersonDataSourceImpl(gh<_i3.DataBaseHelper>()));
+    gh.lazySingleton<_i11.PersonRepository>(
+        () => _i12.PersonRepositoryImpl(gh<_i9.PersonDataSource>()));
+    gh.singleton<_i13.UpdateExpense>(
+        _i13.UpdateExpense(gh<_i6.ExpenseRepository>()));
     gh.singleton<_i14.CreateExpense>(
         _i14.CreateExpense(gh<_i6.ExpenseRepository>()));
     gh.singleton<_i15.CreatePerson>(
-        _i15.CreatePerson(gh<_i12.PersonRepository>()));
+        _i15.CreatePerson(gh<_i11.PersonRepository>()));
     gh.singleton<_i16.GetAllPeople>(
-        _i16.GetAllPeople(gh<_i12.PersonRepository>()));
+        _i16.GetAllPeople(gh<_i11.PersonRepository>()));
     return this;
   }
 }
