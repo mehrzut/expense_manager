@@ -1,18 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_entity.dart';
+part of 'person_entity.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserEntity _$$_UserEntityFromJson(Map<String, dynamic> json) =>
-    _$_UserEntity(
+_$_PersonEntity _$$_PersonEntityFromJson(Map<String, dynamic> json) =>
+    _$_PersonEntity(
       id: json['id'] as int?,
       displayName: json['displayName'] as String,
     );
 
-Map<String, dynamic> _$$_UserEntityToJson(_$_UserEntity instance) =>
+Map<String, dynamic> _$$_PersonEntityToJson(_$_PersonEntity instance) =>
     <String, dynamic>{
       'id': instance.id,
       'displayName': instance.displayName,

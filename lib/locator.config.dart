@@ -20,17 +20,17 @@ import 'package:expense_manager/features/expenses/domain/usecases/get_active_exp
     as _i8;
 import 'package:expense_manager/features/expenses/domain/usecases/update_expense.dart'
     as _i9;
-import 'package:expense_manager/features/users/data/datasources/user_data_source.dart'
+import 'package:expense_manager/features/people/data/datasources/person_data_source.dart'
     as _i10;
-import 'package:expense_manager/features/users/data/datasources/user_data_source_impl.dart'
+import 'package:expense_manager/features/people/data/datasources/person_data_source_impl.dart'
     as _i11;
-import 'package:expense_manager/features/users/data/repositories/user_repository_impl.dart'
+import 'package:expense_manager/features/people/data/repositories/person_repository_impl.dart'
     as _i13;
-import 'package:expense_manager/features/users/domain/repositories/user_repository.dart'
+import 'package:expense_manager/features/people/domain/repositories/person_repository.dart'
     as _i12;
-import 'package:expense_manager/features/users/domain/usecases/create_user.dart'
+import 'package:expense_manager/features/people/domain/usecases/create_person.dart'
     as _i15;
-import 'package:expense_manager/features/users/domain/usecases/get_all_users.dart'
+import 'package:expense_manager/features/people/domain/usecases/get_all_people.dart'
     as _i16;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
@@ -57,14 +57,16 @@ extension GetItInjectableX on _i1.GetIt {
         _i8.GetActiveExpenses(gh<_i6.ExpenseRepository>()));
     gh.singleton<_i9.UpdateExpense>(
         _i9.UpdateExpense(gh<_i6.ExpenseRepository>()));
-    gh.lazySingleton<_i10.UserDataSource>(
-        () => _i11.UserDataSourceImpl(gh<_i3.DataBaseHelper>()));
-    gh.lazySingleton<_i12.UserRepository>(
-        () => _i13.UserRepositoryImpl(gh<_i10.UserDataSource>()));
+    gh.lazySingleton<_i10.PersonDataSource>(
+        () => _i11.PersonDataSourceImpl(gh<_i3.DataBaseHelper>()));
+    gh.lazySingleton<_i12.PersonRepository>(
+        () => _i13.PersonRepositoryImpl(gh<_i10.PersonDataSource>()));
     gh.singleton<_i14.CreateExpense>(
         _i14.CreateExpense(gh<_i6.ExpenseRepository>()));
-    gh.singleton<_i15.CreateUser>(_i15.CreateUser(gh<_i12.UserRepository>()));
-    gh.singleton<_i16.GetAllUsers>(_i16.GetAllUsers(gh<_i12.UserRepository>()));
+    gh.singleton<_i15.CreatePerson>(
+        _i15.CreatePerson(gh<_i12.PersonRepository>()));
+    gh.singleton<_i16.GetAllPeople>(
+        _i16.GetAllPeople(gh<_i12.PersonRepository>()));
     return this;
   }
 }

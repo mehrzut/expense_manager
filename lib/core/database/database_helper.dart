@@ -1,6 +1,6 @@
-import 'package:expense_manager/core/database/users_table.dart';
+import 'package:expense_manager/core/database/people_table.dart';
 import 'package:expense_manager/features/expenses/domain/entities/expense_entity.dart';
-import 'package:expense_manager/features/users/domain/entities/user_entity.dart';
+import 'package:expense_manager/features/people/domain/entities/person_entity.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -11,11 +11,11 @@ import 'expenses_table.dart';
 class DataBaseHelper {
   static const _dbName = 'expense_manager.db';
 
-  static final UsersTable _usersTable = UsersTable();
+  static final PeopleTable _peopleTable = PeopleTable();
   static final ExpensesTable _expensesTable = ExpensesTable();
 
   final List<DataBaseTable> _tables = [
-    _usersTable,
+    _peopleTable,
     _expensesTable,
   ];
 
@@ -36,16 +36,20 @@ class DataBaseHelper {
     });
   }
 
-  //! Users Table
-  Future<List<UserEntity>> getAllUsers() => _usersTable.getAll(_db);
+  //! People Table
+  Future<List<PersonEntity>> getAllPeople() => _peopleTable.getAll(_db);
 
-  Future<UserEntity?> getUser(int userId) => _usersTable.getById(_db, userId);
+  Future<PersonEntity?> getPerson(int personId) =>
+      _peopleTable.getById(_db, personId);
 
-  Future<void> insertUser(UserEntity user) => _usersTable.insert(_db, user);
+  Future<void> insertPerson(PersonEntity person) =>
+      _peopleTable.insert(_db, person);
 
-  Future<void> deleteUser(UserEntity user) => _usersTable.delete(_db, user);
+  Future<void> deletePerson(PersonEntity person) =>
+      _peopleTable.delete(_db, person);
 
-  Future<void> updateUser(UserEntity user) => _usersTable.update(_db, user);
+  Future<void> updatePerson(PersonEntity person) =>
+      _peopleTable.update(_db, person);
 
   //! Expenses Table
   Future<List<ExpenseEntity>> getAllExpenses() => _expensesTable.getAll(_db);
