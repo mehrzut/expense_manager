@@ -9,14 +9,15 @@ class ExpensesTable implements DataBaseTable<ExpenseEntity> {
   static const columnDescription = 'description';
   static const columnPrice = 'price';
   static const columnCurrency = 'currency';
-  static const columnOtherEnd = 'otherEnd';
+  static const columnPersonName = 'personName';
+  static const columnPersonId = 'personId';
   static const columnExpenseType = 'expenseType';
   static const columnIsPaid = 'isPaid';
 
   @override
   Future<void> create(Database db) async {
     return await db.execute(
-        'CREATE TABLE $tableName ($columnId INTEGER PRIMARY KEY AUTOINCREMENT, $columnDescription TEXT, $columnCurrency TEXT, $columnPrice REAL, $columnOtherEnd TEXT, $columnExpenseType TEXT, $columnIsPaid INTEGER)');
+        'CREATE TABLE $tableName ($columnId INTEGER PRIMARY KEY AUTOINCREMENT, $columnDescription TEXT, $columnCurrency TEXT, $columnPrice REAL, $columnPersonName TEXT, $columnExpenseType TEXT, $columnPersonId INTEGER, $columnIsPaid INTEGER)');
   }
 
   @override

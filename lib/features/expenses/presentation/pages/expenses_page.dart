@@ -1,3 +1,4 @@
+import 'package:expense_manager/common/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class ExpensesPage extends StatefulWidget {
@@ -10,7 +11,9 @@ class _ExpensesPage extends State<ExpensesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, AppRoutes.add_expense);
+          },
           label: Row(
             children: const [
               Text('Add'),

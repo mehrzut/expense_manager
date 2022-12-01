@@ -7,33 +7,34 @@ import 'package:sqflite/sqflite.dart';
 import 'database_table.dart';
 import 'expenses_table.dart';
 
-@singleton
+@lazySingleton
 class DataBaseHelper {
   static const _dbName = 'expense_manager.db';
 
   static final PeopleTable _peopleTable = PeopleTable();
   static final ExpensesTable _expensesTable = ExpensesTable();
 
-  final List<DataBaseTable> _tables = [
+  static final List<DataBaseTable> _tables = [
     _peopleTable,
     _expensesTable,
   ];
 
   static late Database _db;
 
-  DataBaseHelper() {
-    _init();
-  }
+  DataBaseHelper._();
 
-  void _init() async {
+  @preResolve
+  @factoryMethod
+  static Future<DataBaseHelper> init() async {
     final path = await getDatabasesPath();
-    _db = await openDatabase('$path$_dbName', version: 1,
+    _db = await openDatabase('$path/$_dbName', version: 1,
         onCreate: (Database db, int version) async {
       // When creating the db, create the tables
-      for (DataBaseTable table in _tables) {
-        table.create(db);
+       for (DataBaseTable table in _tables) {
+        await table.create(db);
       }
     });
+    return DataBaseHelper._();
   }
 
   //! People Table

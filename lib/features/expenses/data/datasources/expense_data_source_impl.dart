@@ -4,11 +4,10 @@ import 'package:injectable/injectable.dart';
 
 import 'expense_data_source.dart';
 
-
 @LazySingleton(as: ExpenseDataSource)
 class ExpenseDataSourceImpl implements ExpenseDataSource {
   final DataBaseHelper dataBaseHelper;
-
+  @factoryMethod
   ExpenseDataSourceImpl(this.dataBaseHelper);
 
   @override

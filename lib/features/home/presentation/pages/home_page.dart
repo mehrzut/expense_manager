@@ -2,6 +2,9 @@ import 'package:expense_manager/common/app_strings.dart';
 import 'package:expense_manager/features/expenses/presentation/pages/expenses_page.dart';
 import 'package:expense_manager/features/people/presentation/pages/people_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../people/presentation/bloc/people_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,6 +20,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     tabController = TabController(length: 2, vsync: this);
+    context.read<PeopleBloc>().add(const PeopleEvent.getAll());
   }
 
   @override
@@ -39,9 +43,8 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
       body: TabBarView(
         controller: tabController,
         children: [
-          PeoplePage(),
-          ExpensesPage(
-          ),
+          const PeoplePage(),
+          ExpensesPage(),
         ],
       ),
     );

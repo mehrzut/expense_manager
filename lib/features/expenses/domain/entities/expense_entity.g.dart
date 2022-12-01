@@ -12,7 +12,8 @@ _$_ExpenseEntity _$$_ExpenseEntityFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String,
       price: (json['price'] as num).toDouble(),
       currency: json['currency'] as String,
-      otherEnd: json['otherEnd'] as String?,
+      personName: json['personName'] as String?,
+      personId: json['personId'] as int?,
       expenseType: $enumDecode(_$ExpenseTypeEnumMap, json['expenseType']),
       isPaid: json['isPaid'] as int? ?? 0,
     );
@@ -23,7 +24,8 @@ Map<String, dynamic> _$$_ExpenseEntityToJson(_$_ExpenseEntity instance) =>
       'description': instance.description,
       'price': instance.price,
       'currency': instance.currency,
-      'otherEnd': instance.otherEnd,
+      'personName': instance.personName,
+      'personId': instance.personId,
       'expenseType': _$ExpenseTypeEnumMap[instance.expenseType]!,
       'isPaid': instance.isPaid,
     };

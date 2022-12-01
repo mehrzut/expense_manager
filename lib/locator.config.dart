@@ -32,6 +32,8 @@ import 'package:expense_manager/features/people/domain/usecases/create_person.da
     as _i15;
 import 'package:expense_manager/features/people/domain/usecases/get_all_people.dart'
     as _i16;
+import 'package:expense_manager/features/people/presentation/bloc/people_bloc.dart'
+    as _i17;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
@@ -39,16 +41,19 @@ import 'package:injectable/injectable.dart' as _i2;
 /// ignore_for_file: lines_longer_than_80_chars
 extension GetItInjectableX on _i1.GetIt {
   /// initializes the registration of main-scope dependencies inside of [GetIt]
-  _i1.GetIt init({
+  Future<_i1.GetIt> init({
     String? environment,
     _i2.EnvironmentFilter? environmentFilter,
-  }) {
+  }) async {
     final gh = _i2.GetItHelper(
       this,
       environment,
       environmentFilter,
     );
-    gh.singleton<_i3.DataBaseHelper>(_i3.DataBaseHelper());
+    await gh.lazySingletonAsync<_i3.DataBaseHelper>(
+      () => _i3.DataBaseHelper.init(),
+      preResolve: true,
+    );
     gh.lazySingleton<_i4.ExpenseDataSource>(
         () => _i5.ExpenseDataSourceImpl(gh<_i3.DataBaseHelper>()));
     gh.lazySingleton<_i6.ExpenseRepository>(
@@ -67,6 +72,7 @@ extension GetItInjectableX on _i1.GetIt {
         _i15.CreatePerson(gh<_i11.PersonRepository>()));
     gh.singleton<_i16.GetAllPeople>(
         _i16.GetAllPeople(gh<_i11.PersonRepository>()));
+    gh.factory<_i17.PeopleBloc>(() => _i17.PeopleBloc(gh<_i16.GetAllPeople>()));
     return this;
   }
 }
