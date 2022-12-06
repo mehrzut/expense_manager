@@ -20,6 +20,8 @@ import 'package:expense_manager/features/expenses/domain/usecases/get_active_exp
     as _i8;
 import 'package:expense_manager/features/expenses/domain/usecases/update_expense.dart'
     as _i13;
+import 'package:expense_manager/features/expenses/presentation/bloc/expense_bloc.dart'
+    as _i17;
 import 'package:expense_manager/features/people/data/datasources/person_data_source.dart'
     as _i9;
 import 'package:expense_manager/features/people/data/datasources/person_data_source_impl.dart'
@@ -31,9 +33,11 @@ import 'package:expense_manager/features/people/domain/repositories/person_repos
 import 'package:expense_manager/features/people/domain/usecases/create_person.dart'
     as _i15;
 import 'package:expense_manager/features/people/domain/usecases/get_all_people.dart'
+    as _i18;
+import 'package:expense_manager/features/people/presentation/bloc/create_person_bloc.dart'
     as _i16;
 import 'package:expense_manager/features/people/presentation/bloc/people_bloc.dart'
-    as _i17;
+    as _i19;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
@@ -70,9 +74,13 @@ extension GetItInjectableX on _i1.GetIt {
         _i14.CreateExpense(gh<_i6.ExpenseRepository>()));
     gh.singleton<_i15.CreatePerson>(
         _i15.CreatePerson(gh<_i11.PersonRepository>()));
-    gh.singleton<_i16.GetAllPeople>(
-        _i16.GetAllPeople(gh<_i11.PersonRepository>()));
-    gh.factory<_i17.PeopleBloc>(() => _i17.PeopleBloc(gh<_i16.GetAllPeople>()));
+    gh.factory<_i16.CreatePersonBloc>(
+        () => _i16.CreatePersonBloc(gh<_i15.CreatePerson>()));
+    gh.factory<_i17.ExpenseBloc>(
+        () => _i17.ExpenseBloc(gh<_i8.GetActiveExpenses>()));
+    gh.singleton<_i18.GetAllPeople>(
+        _i18.GetAllPeople(gh<_i11.PersonRepository>()));
+    gh.factory<_i19.PeopleBloc>(() => _i19.PeopleBloc(gh<_i18.GetAllPeople>()));
     return this;
   }
 }
