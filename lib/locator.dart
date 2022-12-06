@@ -5,4 +5,4 @@ import 'package:injectable/injectable.dart';
 final getIt = GetIt.instance;
 
 @injectableInit
-void initInjection() => getIt.init();
+Future initInjection() => getIt.init();

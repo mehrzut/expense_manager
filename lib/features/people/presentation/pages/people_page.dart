@@ -1,7 +1,9 @@
 import 'package:expense_manager/common/app_routes.dart';
+import 'package:expense_manager/core/extensions/extensions.dart';
 import 'package:expense_manager/features/people/presentation/bloc/people_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/create_person_bloc.dart';
 
 class PeoplePage extends StatelessWidget {
   const PeoplePage({super.key});
@@ -23,24 +25,68 @@ class PeoplePage extends StatelessWidget {
           ],
         ),
       ),
-      body: BlocBuilder<PeopleBloc, PeopleState>(
-        builder: (context, state) => state.when(
-          initial: () => const SizedBox(),
-          loading: () => const Center(
-            child: CircularProgressIndicator(),
+      body: BlocListener<PeopleBloc, PeopleState>(
+        listener: (context, state) {
+          if (state is FailedGetAllPeople) {
+            _failedGetAllPeopleHandler(context);
+          }
+        },
+        child: BlocListener<CreatePersonBloc, CreatePersonState>(
+          listener: (context, creationState) {
+            if (creationState is SuccessPersonCreation) {
+              getData(context);
+            }
+          },
+          child: BlocBuilder<PeopleBloc, PeopleState>(
+            builder: (context, state) => state.maybeWhen(
+              loading: () => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              loaded: (people) => people.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: people.length,
+                      itemBuilder: (context, index) => Card(
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            child: Center(
+                              child: Text(people[index].id.toString()),
+                            ),
+                          ),
+                          title: Text(people[index].displayName),
+                        ),
+                      ),
+                    )
+                  : const Center(
+                      child: Text('List is empty!'),
+                    ),
+              failed: (message) => Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Center(child: Text("Could't get data! try again.")),
+                  TextButton(
+                    onPressed: () => getData(context),
+                    child: const Text('Retry'),
+                  )
+                ],
+              ),
+              orElse: () => const SizedBox(),
+            ),
           ),
-          loaded: (people) => people.isNotEmpty
-              ? ListView.builder(
-                  itemCount: people.length,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text(people[index].displayName),
-                  ),
-                )
-              : Center(
-                  child: Text('List is empty!'),
-                ),
         ),
       ),
     );
+  }
+
+  void _failedGetAllPeopleHandler(BuildContext context) {
+    ScaffoldMessenger.of(context).showErrorSnack(
+      "Could't get data! try again.",
+      retry: () {
+        getData(context);
+      },
+    );
+  }
+
+  void getData(BuildContext context) {
+    context.read<PeopleBloc>().add(const PeopleEvent.getAll());
   }
 }

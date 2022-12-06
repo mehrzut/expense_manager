@@ -20,6 +20,7 @@ ExpenseEntity _$ExpenseEntityFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ExpenseEntity {
+  @JsonKey(name: '_id')
   int? get id => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
@@ -42,7 +43,7 @@ abstract class $ExpenseEntityCopyWith<$Res> {
       _$ExpenseEntityCopyWithImpl<$Res, ExpenseEntity>;
   @useResult
   $Res call(
-      {int? id,
+      {@JsonKey(name: '_id') int? id,
       String description,
       double price,
       String currency,
@@ -120,7 +121,7 @@ abstract class _$$_ExpenseEntityCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
+      {@JsonKey(name: '_id') int? id,
       String description,
       double price,
       String currency,
@@ -189,21 +190,23 @@ class __$$_ExpenseEntityCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ExpenseEntity implements _ExpenseEntity {
+class _$_ExpenseEntity extends _ExpenseEntity {
   _$_ExpenseEntity(
-      {this.id,
+      {@JsonKey(name: '_id') this.id,
       required this.description,
       required this.price,
       required this.currency,
       this.personName,
       this.personId,
       required this.expenseType,
-      this.isPaid = 0});
+      this.isPaid = 0})
+      : super._();
 
   factory _$_ExpenseEntity.fromJson(Map<String, dynamic> json) =>
       _$$_ExpenseEntityFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
   final int? id;
   @override
   final String description;
@@ -265,9 +268,9 @@ class _$_ExpenseEntity implements _ExpenseEntity {
   }
 }
 
-abstract class _ExpenseEntity implements ExpenseEntity {
+abstract class _ExpenseEntity extends ExpenseEntity {
   factory _ExpenseEntity(
-      {final int? id,
+      {@JsonKey(name: '_id') final int? id,
       required final String description,
       required final double price,
       required final String currency,
@@ -275,11 +278,13 @@ abstract class _ExpenseEntity implements ExpenseEntity {
       final int? personId,
       required final ExpenseType expenseType,
       final int isPaid}) = _$_ExpenseEntity;
+  _ExpenseEntity._() : super._();
 
   factory _ExpenseEntity.fromJson(Map<String, dynamic> json) =
       _$_ExpenseEntity.fromJson;
 
   @override
+  @JsonKey(name: '_id')
   int? get id;
   @override
   String get description;

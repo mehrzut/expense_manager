@@ -4,6 +4,7 @@ import 'package:expense_manager/features/people/presentation/pages/people_page.d
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../expenses/presentation/bloc/expense_bloc.dart';
 import '../../../people/presentation/bloc/people_bloc.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,6 +22,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
     super.initState();
     tabController = TabController(length: 2, vsync: this);
     context.read<PeopleBloc>().add(const PeopleEvent.getAll());
+    context.read<ExpenseBloc>().add(const ExpenseEvent.getAll());
   }
 
   @override

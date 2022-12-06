@@ -7,18 +7,25 @@ part 'expense_entity.g.dart';
 
 @freezed
 abstract class ExpenseEntity with _$ExpenseEntity {
-  factory ExpenseEntity({
-    int? id,
-    required String description,
-    required double price,
-    required String currency,
-    String? personName,
-    int? personId,
-    required ExpenseType expenseType,
-    @Default(0)
-    int isPaid
-  }) = _ExpenseEntity;
+  ExpenseEntity._();
+  factory ExpenseEntity(
+      {@JsonKey(name: '_id') int? id,
+      required String description,
+      required double price,
+      required String currency,
+      String? personName,
+      int? personId,
+      required ExpenseType expenseType,
+      @Default(0) int isPaid}) = _ExpenseEntity;
 
   factory ExpenseEntity.fromJson(Map<String, dynamic> json) =>
       _$ExpenseEntityFromJson(json);
+
+  Map<String, dynamic> toJsonWithoutNull() {
+    final json = toJson();
+    json.removeWhere(
+      (key, value) => value == null,
+    );
+    return json;
+  }
 }

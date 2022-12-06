@@ -20,8 +20,10 @@ PersonEntity _$PersonEntityFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PersonEntity {
+  @JsonKey(name: '_id')
   int? get id => throw _privateConstructorUsedError;
   String get displayName => throw _privateConstructorUsedError;
+  String? get cardNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +37,8 @@ abstract class $PersonEntityCopyWith<$Res> {
           PersonEntity value, $Res Function(PersonEntity) then) =
       _$PersonEntityCopyWithImpl<$Res, PersonEntity>;
   @useResult
-  $Res call({int? id, String displayName});
+  $Res call(
+      {@JsonKey(name: '_id') int? id, String displayName, String? cardNumber});
 }
 
 /// @nodoc
@@ -53,6 +56,7 @@ class _$PersonEntityCopyWithImpl<$Res, $Val extends PersonEntity>
   $Res call({
     Object? id = freezed,
     Object? displayName = null,
+    Object? cardNumber = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -63,6 +67,10 @@ class _$PersonEntityCopyWithImpl<$Res, $Val extends PersonEntity>
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
               as String,
+      cardNumber: freezed == cardNumber
+          ? _value.cardNumber
+          : cardNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -75,7 +83,8 @@ abstract class _$$_PersonEntityCopyWith<$Res>
       __$$_PersonEntityCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String displayName});
+  $Res call(
+      {@JsonKey(name: '_id') int? id, String displayName, String? cardNumber});
 }
 
 /// @nodoc
@@ -91,6 +100,7 @@ class __$$_PersonEntityCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? displayName = null,
+    Object? cardNumber = freezed,
   }) {
     return _then(_$_PersonEntity(
       id: freezed == id
@@ -101,26 +111,37 @@ class __$$_PersonEntityCopyWithImpl<$Res>
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
               as String,
+      cardNumber: freezed == cardNumber
+          ? _value.cardNumber
+          : cardNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_PersonEntity implements _PersonEntity {
-  _$_PersonEntity({this.id, required this.displayName});
+class _$_PersonEntity extends _PersonEntity {
+  _$_PersonEntity(
+      {@JsonKey(name: '_id') this.id,
+      required this.displayName,
+      this.cardNumber})
+      : super._();
 
   factory _$_PersonEntity.fromJson(Map<String, dynamic> json) =>
       _$$_PersonEntityFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
   final int? id;
   @override
   final String displayName;
+  @override
+  final String? cardNumber;
 
   @override
   String toString() {
-    return 'PersonEntity(id: $id, displayName: $displayName)';
+    return 'PersonEntity(id: $id, displayName: $displayName, cardNumber: $cardNumber)';
   }
 
   @override
@@ -130,12 +151,14 @@ class _$_PersonEntity implements _PersonEntity {
             other is _$_PersonEntity &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.displayName, displayName) ||
-                other.displayName == displayName));
+                other.displayName == displayName) &&
+            (identical(other.cardNumber, cardNumber) ||
+                other.cardNumber == cardNumber));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, displayName);
+  int get hashCode => Object.hash(runtimeType, id, displayName, cardNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -151,17 +174,23 @@ class _$_PersonEntity implements _PersonEntity {
   }
 }
 
-abstract class _PersonEntity implements PersonEntity {
-  factory _PersonEntity({final int? id, required final String displayName}) =
-      _$_PersonEntity;
+abstract class _PersonEntity extends PersonEntity {
+  factory _PersonEntity(
+      {@JsonKey(name: '_id') final int? id,
+      required final String displayName,
+      final String? cardNumber}) = _$_PersonEntity;
+  _PersonEntity._() : super._();
 
   factory _PersonEntity.fromJson(Map<String, dynamic> json) =
       _$_PersonEntity.fromJson;
 
   @override
+  @JsonKey(name: '_id')
   int? get id;
   @override
   String get displayName;
+  @override
+  String? get cardNumber;
   @override
   @JsonKey(ignore: true)
   _$$_PersonEntityCopyWith<_$_PersonEntity> get copyWith =>

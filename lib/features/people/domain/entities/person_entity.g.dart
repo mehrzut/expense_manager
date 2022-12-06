@@ -8,12 +8,14 @@ part of 'person_entity.dart';
 
 _$_PersonEntity _$$_PersonEntityFromJson(Map<String, dynamic> json) =>
     _$_PersonEntity(
-      id: json['id'] as int?,
+      id: json['_id'] as int?,
       displayName: json['displayName'] as String,
+      cardNumber: json['cardNumber'] as String?,
     );
 
 Map<String, dynamic> _$$_PersonEntityToJson(_$_PersonEntity instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'displayName': instance.displayName,
+      'cardNumber': instance.cardNumber,
     };

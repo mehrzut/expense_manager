@@ -42,11 +42,11 @@ class ExpensesTable implements DataBaseTable<ExpenseEntity> {
 
   @override
   Future<void> insert(Database db, ExpenseEntity data) {
-    return db.insert(tableName, data.toJson());
+    return db.insert(tableName, data.toJsonWithoutNull());
   }
 
   @override
   Future<void> update(Database db, ExpenseEntity data) {
-    return db.update(tableName, data.toJson());
+    return db.update(tableName, data.toJsonWithoutNull());
   }
 }

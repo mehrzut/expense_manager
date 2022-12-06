@@ -8,7 +8,7 @@ part of 'expense_entity.dart';
 
 _$_ExpenseEntity _$$_ExpenseEntityFromJson(Map<String, dynamic> json) =>
     _$_ExpenseEntity(
-      id: json['id'] as int?,
+      id: json['_id'] as int?,
       description: json['description'] as String,
       price: (json['price'] as num).toDouble(),
       currency: json['currency'] as String,
@@ -20,7 +20,7 @@ _$_ExpenseEntity _$$_ExpenseEntityFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_ExpenseEntityToJson(_$_ExpenseEntity instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'description': instance.description,
       'price': instance.price,
       'currency': instance.currency,

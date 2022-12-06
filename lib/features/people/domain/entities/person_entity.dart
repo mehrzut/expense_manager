@@ -5,11 +5,21 @@ part 'person_entity.g.dart';
 
 @freezed
 abstract class PersonEntity with _$PersonEntity {
+  PersonEntity._();
   factory PersonEntity({
-    int? id,
+    @JsonKey(name: '_id') int? id,
     required String displayName,
+    String? cardNumber,
   }) = _PersonEntity;
 
   factory PersonEntity.fromJson(Map<String, dynamic> json) =>
       _$PersonEntityFromJson(json);
+
+  Map<String, dynamic> toJsonWithoutNull() {
+    final json = toJson();
+    json.removeWhere(
+      (key, value) => value == null,
+    );
+    return json;
+  }
 }

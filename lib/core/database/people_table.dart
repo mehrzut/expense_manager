@@ -36,11 +36,11 @@ class PeopleTable implements DataBaseTable<PersonEntity> {
 
   @override
   Future<void> insert(Database db, PersonEntity data) {
-    return db.insert(tableName, data.toJson());
+    return db.insert(tableName, data.toJsonWithoutNull());
   }
 
   @override
   Future<void> update(Database db, PersonEntity data) {
-    return db.update(tableName, data.toJson());
+    return db.update(tableName, data.toJsonWithoutNull());
   }
 }

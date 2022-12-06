@@ -10,9 +10,12 @@ import 'package:expense_manager/l10n/l10n.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
-  initInjection();
+import 'features/expenses/presentation/bloc/expense_bloc.dart';
+import 'features/people/presentation/bloc/create_person_bloc.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initInjection();
   runApp(const MyApp());
 }
 
@@ -25,7 +28,13 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<PeopleBloc>(
           create: (context) => getIt(),
-        )
+        ),
+        BlocProvider<ExpenseBloc>(
+          create: (context) => getIt(),
+        ),
+        BlocProvider<CreatePersonBloc>(
+          create: (context) => getIt(),
+        ),
       ],
       child: MaterialApp(
         theme: AppThemes.dark,
