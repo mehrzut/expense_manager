@@ -1,12 +1,11 @@
-import 'package:expense_manager/common/app_colors.dart';
 import 'package:expense_manager/core/enums/enums.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class ExpenseTypeWidget extends StatelessWidget {
-  const ExpenseTypeWidget({super.key, required this.onChanged});
+  const ExpenseTypeWidget(
+      {super.key, required this.onChanged, required this.selectedType});
   final Function(ExpenseType) onChanged;
+  final ExpenseType? selectedType;
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +16,10 @@ class ExpenseTypeWidget extends StatelessWidget {
             left: Radius.circular(12),
           ),
           text: 'Debt',
-          isSelected: true,
-          onTap: () {},
+          isSelected: selectedType == ExpenseType.debt,
+          onTap: () {
+            onChanged(ExpenseType.debt);
+          },
         ),
         SizedBox(
           width: 1,
@@ -28,8 +29,10 @@ class ExpenseTypeWidget extends StatelessWidget {
             right: Radius.circular(12),
           ),
           text: 'Credit',
-          isSelected: false,
-          onTap: () {},
+          isSelected: selectedType == ExpenseType.credit,
+          onTap: () {
+            onChanged(ExpenseType.credit);
+          },
         ),
       ],
     );
@@ -58,7 +61,7 @@ class _TypeButton extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
               color: isSelected
-                  ? Theme.of(context).primaryColor.withOpacity(0.7)
+                  ? Colors.lightBlue.withOpacity(0.7)
                   : Colors.white10,
               borderRadius: borderRadius),
           child: Center(

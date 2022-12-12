@@ -1,5 +1,6 @@
 import 'package:expense_manager/common/app_routes.dart';
 import 'package:expense_manager/common/app_themes.dart';
+import 'package:expense_manager/features/expenses/presentation/cubit/expense_input_cubit.dart';
 import 'package:expense_manager/features/expenses/presentation/pages/add_expense_page.dart';
 import 'package:expense_manager/features/home/presentation/pages/home_page.dart';
 import 'package:expense_manager/features/people/presentation/bloc/people_bloc.dart';
@@ -42,8 +43,11 @@ class MyApp extends StatelessWidget {
         supportedLocales: L10n.supportedLanguages,
         initialRoute: AppRoutes.initialRoute,
         routes: {
-          AppRoutes.home: (context) => HomePage(),
-          AppRoutes.add_expense: (context) => AddExpensePage(),
+          AppRoutes.home: (context) => const HomePage(),
+          AppRoutes.add_expense: (context) => BlocProvider<ExpenseInputCubit>(
+                create: (context) => getIt(),
+                child: const AddExpensePage(),
+              ),
           AppRoutes.add_person: (context) => AddPersonPage(),
         },
       ),
