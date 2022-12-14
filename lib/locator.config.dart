@@ -20,8 +20,10 @@ import 'package:expense_manager/features/expenses/domain/usecases/get_active_exp
     as _i9;
 import 'package:expense_manager/features/expenses/domain/usecases/update_expense.dart'
     as _i14;
+import 'package:expense_manager/features/expenses/presentation/bloc/create_expense_bloc.dart'
+    as _i16;
 import 'package:expense_manager/features/expenses/presentation/bloc/expense_bloc.dart'
-    as _i18;
+    as _i19;
 import 'package:expense_manager/features/expenses/presentation/cubit/expense_input_cubit.dart'
     as _i6;
 import 'package:expense_manager/features/people/data/datasources/person_data_source.dart'
@@ -33,13 +35,13 @@ import 'package:expense_manager/features/people/data/repositories/person_reposit
 import 'package:expense_manager/features/people/domain/repositories/person_repository.dart'
     as _i12;
 import 'package:expense_manager/features/people/domain/usecases/create_person.dart'
-    as _i16;
-import 'package:expense_manager/features/people/domain/usecases/get_all_people.dart'
-    as _i19;
-import 'package:expense_manager/features/people/presentation/bloc/create_person_bloc.dart'
     as _i17;
-import 'package:expense_manager/features/people/presentation/bloc/people_bloc.dart'
+import 'package:expense_manager/features/people/domain/usecases/get_all_people.dart'
     as _i20;
+import 'package:expense_manager/features/people/presentation/bloc/create_person_bloc.dart'
+    as _i18;
+import 'package:expense_manager/features/people/presentation/bloc/people_bloc.dart'
+    as _i21;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
@@ -75,15 +77,17 @@ extension GetItInjectableX on _i1.GetIt {
         _i14.UpdateExpense(gh<_i7.ExpenseRepository>()));
     gh.singleton<_i15.CreateExpense>(
         _i15.CreateExpense(gh<_i7.ExpenseRepository>()));
-    gh.singleton<_i16.CreatePerson>(
-        _i16.CreatePerson(gh<_i12.PersonRepository>()));
-    gh.factory<_i17.CreatePersonBloc>(
-        () => _i17.CreatePersonBloc(gh<_i16.CreatePerson>()));
-    gh.factory<_i18.ExpenseBloc>(
-        () => _i18.ExpenseBloc(gh<_i9.GetActiveExpenses>()));
-    gh.singleton<_i19.GetAllPeople>(
-        _i19.GetAllPeople(gh<_i12.PersonRepository>()));
-    gh.factory<_i20.PeopleBloc>(() => _i20.PeopleBloc(gh<_i19.GetAllPeople>()));
+    gh.factory<_i16.CreateExpenseBloc>(
+        () => _i16.CreateExpenseBloc(gh<_i15.CreateExpense>()));
+    gh.singleton<_i17.CreatePerson>(
+        _i17.CreatePerson(gh<_i12.PersonRepository>()));
+    gh.factory<_i18.CreatePersonBloc>(
+        () => _i18.CreatePersonBloc(gh<_i17.CreatePerson>()));
+    gh.factory<_i19.ExpenseBloc>(
+        () => _i19.ExpenseBloc(gh<_i9.GetActiveExpenses>()));
+    gh.singleton<_i20.GetAllPeople>(
+        _i20.GetAllPeople(gh<_i12.PersonRepository>()));
+    gh.factory<_i21.PeopleBloc>(() => _i21.PeopleBloc(gh<_i20.GetAllPeople>()));
     return this;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:expense_manager/core/enums/enums.dart';
+import 'package:expense_manager/features/expenses/domain/entities/expense_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -16,6 +17,13 @@ class ExpenseInputCubit extends Cubit<ExpenseInputState> {
             personId: null,
             personName: null,
             title: null));
+
+  ExpenseEntity get expense => ExpenseEntity(
+      description: state.title!,
+      price: state.amount!,
+      currency: state.currency!,
+      expenseType: state.expenseType!);
+
   void update({
     String? title,
     double? amount,
@@ -42,5 +50,15 @@ class ExpenseInputCubit extends Cubit<ExpenseInputState> {
     if (expenseType != null) {
       emit(state.copyWith(expenseType: expenseType));
     }
+  }
+
+  bool validate() {
+    return state.amount != null &&
+        state.currency != null &&
+        state.currency!.isNotEmpty &&
+        state.expenseType != null &&
+        state.personId != null &&
+        state.personName != null &&
+        state.personName!.isNotEmpty;
   }
 }

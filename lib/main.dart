@@ -11,6 +11,7 @@ import 'package:expense_manager/l10n/l10n.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'features/expenses/presentation/bloc/create_expense_bloc.dart';
 import 'features/expenses/presentation/bloc/expense_bloc.dart';
 import 'features/people/presentation/bloc/create_person_bloc.dart';
 
@@ -44,8 +45,15 @@ class MyApp extends StatelessWidget {
         initialRoute: AppRoutes.initialRoute,
         routes: {
           AppRoutes.home: (context) => const HomePage(),
-          AppRoutes.add_expense: (context) => BlocProvider<ExpenseInputCubit>(
-                create: (context) => getIt(),
+          AppRoutes.add_expense: (context) => MultiBlocProvider(
+                providers: [
+                  BlocProvider<ExpenseInputCubit>(
+                    create: (context) => getIt(),
+                  ),
+                  BlocProvider<CreateExpenseBloc>(
+                    create: (context) => getIt(),
+                  ),
+                ],
                 child: const AddExpensePage(),
               ),
           AppRoutes.add_person: (context) => AddPersonPage(),
