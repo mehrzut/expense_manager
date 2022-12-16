@@ -1,7 +1,10 @@
 import 'package:expense_manager/common/app_routes.dart';
 import 'package:expense_manager/common/app_themes.dart';
+import 'package:expense_manager/features/expenses/domain/entities/expense_entity.dart';
+import 'package:expense_manager/features/expenses/presentation/bloc/edit_expense_bloc.dart';
 import 'package:expense_manager/features/expenses/presentation/cubit/expense_input_cubit.dart';
 import 'package:expense_manager/features/expenses/presentation/pages/add_expense_page.dart';
+import 'package:expense_manager/features/expenses/presentation/pages/expense_detail_page.dart';
 import 'package:expense_manager/features/home/presentation/pages/home_page.dart';
 import 'package:expense_manager/features/people/presentation/bloc/people_bloc.dart';
 import 'package:expense_manager/features/people/presentation/pages/add_person_page.dart';
@@ -45,7 +48,7 @@ class MyApp extends StatelessWidget {
         initialRoute: AppRoutes.initialRoute,
         routes: {
           AppRoutes.home: (context) => const HomePage(),
-          AppRoutes.add_expense: (context) => MultiBlocProvider(
+          AppRoutes.addExpense: (context) => MultiBlocProvider(
                 providers: [
                   BlocProvider<ExpenseInputCubit>(
                     create: (context) => getIt(),
@@ -56,7 +59,20 @@ class MyApp extends StatelessWidget {
                 ],
                 child: const AddExpensePage(),
               ),
-          AppRoutes.add_person: (context) => AddPersonPage(),
+          AppRoutes.expenseDetail: (context) => MultiBlocProvider(
+                providers: [
+                  BlocProvider<ExpenseInputCubit>(
+                    create: (context) => getIt(),
+                  ),
+                  BlocProvider<EditExpenseBloc>(
+                    create: (context) => getIt(),
+                  ),
+                ],
+                child: ExpenseDetailPage(
+                    expenseEntity: ModalRoute.of(context)!.settings.arguments
+                        as ExpenseEntity),
+              ),
+          AppRoutes.addPerson: (context) => AddPersonPage(),
         },
       ),
     );

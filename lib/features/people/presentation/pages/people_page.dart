@@ -13,7 +13,7 @@ class PeoplePage extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.pushNamed(context, AppRoutes.add_person);
+          Navigator.pushNamed(context, AppRoutes.addPerson);
         },
         label: Row(
           children: const [

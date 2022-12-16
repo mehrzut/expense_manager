@@ -22,8 +22,10 @@ import 'package:expense_manager/features/expenses/domain/usecases/update_expense
     as _i14;
 import 'package:expense_manager/features/expenses/presentation/bloc/create_expense_bloc.dart'
     as _i16;
-import 'package:expense_manager/features/expenses/presentation/bloc/expense_bloc.dart'
+import 'package:expense_manager/features/expenses/presentation/bloc/edit_expense_bloc.dart'
     as _i19;
+import 'package:expense_manager/features/expenses/presentation/bloc/expense_bloc.dart'
+    as _i20;
 import 'package:expense_manager/features/expenses/presentation/cubit/expense_input_cubit.dart'
     as _i6;
 import 'package:expense_manager/features/people/data/datasources/person_data_source.dart'
@@ -37,11 +39,11 @@ import 'package:expense_manager/features/people/domain/repositories/person_repos
 import 'package:expense_manager/features/people/domain/usecases/create_person.dart'
     as _i17;
 import 'package:expense_manager/features/people/domain/usecases/get_all_people.dart'
-    as _i20;
+    as _i21;
 import 'package:expense_manager/features/people/presentation/bloc/create_person_bloc.dart'
     as _i18;
 import 'package:expense_manager/features/people/presentation/bloc/people_bloc.dart'
-    as _i21;
+    as _i22;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
@@ -83,11 +85,13 @@ extension GetItInjectableX on _i1.GetIt {
         _i17.CreatePerson(gh<_i12.PersonRepository>()));
     gh.factory<_i18.CreatePersonBloc>(
         () => _i18.CreatePersonBloc(gh<_i17.CreatePerson>()));
-    gh.factory<_i19.ExpenseBloc>(
-        () => _i19.ExpenseBloc(gh<_i9.GetActiveExpenses>()));
-    gh.singleton<_i20.GetAllPeople>(
-        _i20.GetAllPeople(gh<_i12.PersonRepository>()));
-    gh.factory<_i21.PeopleBloc>(() => _i21.PeopleBloc(gh<_i20.GetAllPeople>()));
+    gh.factory<_i19.EditExpenseBloc>(
+        () => _i19.EditExpenseBloc(gh<_i14.UpdateExpense>()));
+    gh.factory<_i20.ExpenseBloc>(
+        () => _i20.ExpenseBloc(gh<_i9.GetActiveExpenses>()));
+    gh.singleton<_i21.GetAllPeople>(
+        _i21.GetAllPeople(gh<_i12.PersonRepository>()));
+    gh.factory<_i22.PeopleBloc>(() => _i22.PeopleBloc(gh<_i21.GetAllPeople>()));
     return this;
   }
 }

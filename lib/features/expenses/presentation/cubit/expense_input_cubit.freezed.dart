@@ -22,6 +22,7 @@ mixin _$ExpenseInputState {
   String? get personName => throw _privateConstructorUsedError;
   int? get personId => throw _privateConstructorUsedError;
   ExpenseType? get expenseType => throw _privateConstructorUsedError;
+  bool? get isPaid => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ExpenseInputStateCopyWith<ExpenseInputState> get copyWith =>
@@ -40,7 +41,8 @@ abstract class $ExpenseInputStateCopyWith<$Res> {
       String? currency,
       String? personName,
       int? personId,
-      ExpenseType? expenseType});
+      ExpenseType? expenseType,
+      bool? isPaid});
 }
 
 /// @nodoc
@@ -62,6 +64,7 @@ class _$ExpenseInputStateCopyWithImpl<$Res, $Val extends ExpenseInputState>
     Object? personName = freezed,
     Object? personId = freezed,
     Object? expenseType = freezed,
+    Object? isPaid = freezed,
   }) {
     return _then(_value.copyWith(
       title: freezed == title
@@ -88,6 +91,10 @@ class _$ExpenseInputStateCopyWithImpl<$Res, $Val extends ExpenseInputState>
           ? _value.expenseType
           : expenseType // ignore: cast_nullable_to_non_nullable
               as ExpenseType?,
+      isPaid: freezed == isPaid
+          ? _value.isPaid
+          : isPaid // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -106,7 +113,8 @@ abstract class _$$_ExpenseInputStateCopyWith<$Res>
       String? currency,
       String? personName,
       int? personId,
-      ExpenseType? expenseType});
+      ExpenseType? expenseType,
+      bool? isPaid});
 }
 
 /// @nodoc
@@ -126,6 +134,7 @@ class __$$_ExpenseInputStateCopyWithImpl<$Res>
     Object? personName = freezed,
     Object? personId = freezed,
     Object? expenseType = freezed,
+    Object? isPaid = freezed,
   }) {
     return _then(_$_ExpenseInputState(
       title: freezed == title
@@ -152,6 +161,10 @@ class __$$_ExpenseInputStateCopyWithImpl<$Res>
           ? _value.expenseType
           : expenseType // ignore: cast_nullable_to_non_nullable
               as ExpenseType?,
+      isPaid: freezed == isPaid
+          ? _value.isPaid
+          : isPaid // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -165,7 +178,8 @@ class _$_ExpenseInputState implements _ExpenseInputState {
       required this.currency,
       required this.personName,
       required this.personId,
-      required this.expenseType});
+      required this.expenseType,
+      required this.isPaid});
 
   @override
   final String? title;
@@ -179,10 +193,12 @@ class _$_ExpenseInputState implements _ExpenseInputState {
   final int? personId;
   @override
   final ExpenseType? expenseType;
+  @override
+  final bool? isPaid;
 
   @override
   String toString() {
-    return 'ExpenseInputState(title: $title, amount: $amount, currency: $currency, personName: $personName, personId: $personId, expenseType: $expenseType)';
+    return 'ExpenseInputState(title: $title, amount: $amount, currency: $currency, personName: $personName, personId: $personId, expenseType: $expenseType, isPaid: $isPaid)';
   }
 
   @override
@@ -199,12 +215,13 @@ class _$_ExpenseInputState implements _ExpenseInputState {
             (identical(other.personId, personId) ||
                 other.personId == personId) &&
             (identical(other.expenseType, expenseType) ||
-                other.expenseType == expenseType));
+                other.expenseType == expenseType) &&
+            (identical(other.isPaid, isPaid) || other.isPaid == isPaid));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, title, amount, currency, personName, personId, expenseType);
+  int get hashCode => Object.hash(runtimeType, title, amount, currency,
+      personName, personId, expenseType, isPaid);
 
   @JsonKey(ignore: true)
   @override
@@ -221,7 +238,8 @@ abstract class _ExpenseInputState implements ExpenseInputState {
       required final String? currency,
       required final String? personName,
       required final int? personId,
-      required final ExpenseType? expenseType}) = _$_ExpenseInputState;
+      required final ExpenseType? expenseType,
+      required final bool? isPaid}) = _$_ExpenseInputState;
 
   @override
   String? get title;
@@ -235,6 +253,8 @@ abstract class _ExpenseInputState implements ExpenseInputState {
   int? get personId;
   @override
   ExpenseType? get expenseType;
+  @override
+  bool? get isPaid;
   @override
   @JsonKey(ignore: true)
   _$$_ExpenseInputStateCopyWith<_$_ExpenseInputState> get copyWith =>

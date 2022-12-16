@@ -16,7 +16,7 @@ class _ExpensesPage extends State<ExpensesPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.pushNamed(context, AppRoutes.add_expense);
+          Navigator.pushNamed(context, AppRoutes.addExpense);
         },
         label: Row(
           children: const [
@@ -44,6 +44,10 @@ class _ExpensesPage extends State<ExpensesPage> {
                     itemCount: expenses.length,
                     itemBuilder: (context, index) => Card(
                       child: ListTile(
+                        onTap: () {
+                          Navigator.pushNamed(context, AppRoutes.expenseDetail,
+                              arguments: expenses[index]);
+                        },
                         leading: CircleAvatar(
                           child: Center(
                             child: Text(expenses[index].id.toString()),

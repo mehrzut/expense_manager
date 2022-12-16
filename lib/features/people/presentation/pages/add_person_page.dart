@@ -61,7 +61,7 @@ class AddPersonPage extends StatelessWidget {
   }
 
   void _successPersonCreationHandler(BuildContext context) {
-    if (ModalRoute.of(context)?.settings.name == AppRoutes.add_person) {
+    if (ModalRoute.of(context)?.settings.name == AppRoutes.addPerson) {
       Navigator.pop(context);
     }
   }

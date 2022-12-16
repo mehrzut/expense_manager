@@ -9,5 +9,6 @@ class ExpenseInputState with _$ExpenseInputState {
     required String? personName,
     required int? personId,
     required ExpenseType? expenseType,
+    required bool? isPaid,
   }) = _ExpenseInputState;
 }

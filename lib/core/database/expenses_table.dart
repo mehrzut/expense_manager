@@ -47,6 +47,8 @@ class ExpensesTable implements DataBaseTable<ExpenseEntity> {
 
   @override
   Future<void> update(Database db, ExpenseEntity data) {
-    return db.update(tableName, data.toJsonWithoutNull());
+    Map<String, dynamic> map = data.toJsonWithoutNull();
+    map.remove('_id');
+    return db.update(tableName, map, where: '_id = ?', whereArgs: [data.id]);
   }
 }

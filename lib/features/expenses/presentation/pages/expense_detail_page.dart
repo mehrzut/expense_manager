@@ -1,36 +1,44 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:expense_manager/core/extensions/extensions.dart';
-import 'package:expense_manager/features/expenses/presentation/bloc/create_expense_bloc.dart';
-import 'package:expense_manager/features/expenses/presentation/bloc/expense_bloc.dart';
-import 'package:expense_manager/features/expenses/presentation/cubit/expense_input_cubit.dart';
+import 'package:expense_manager/features/expenses/domain/entities/expense_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../people/domain/entities/person_entity.dart';
 import '../../../people/presentation/bloc/people_bloc.dart';
+import '../bloc/edit_expense_bloc.dart';
+import '../bloc/expense_bloc.dart';
+import '../cubit/expense_input_cubit.dart';
 import '../widgets/expense_type_widget.dart';
 
-class AddExpensePage extends StatefulWidget {
-  const AddExpensePage({super.key});
+class ExpenseDetailPage extends StatefulWidget {
+  const ExpenseDetailPage({super.key, required this.expenseEntity});
 
+  final ExpenseEntity expenseEntity;
   @override
-  State<AddExpensePage> createState() => _AddExpensePageState();
+  State<ExpenseDetailPage> createState() => _ExpenseDetailPageState();
 }
 
-class _AddExpensePageState extends State<AddExpensePage> {
+class _ExpenseDetailPageState extends State<ExpenseDetailPage> {
+  @override
+  void initState() {
+    super.initState();
+    _initInputs();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Expense'),
+        title: const Text('Expense Detail'),
       ),
-      body: BlocListener<CreateExpenseBloc, CreateExpenseState>(
+      body: BlocListener<EditExpenseBloc, EditExpenseState>(
         listener: (context, state) {
-          if (state is CreatedExpense) {
-            _onCreatedExpense();
+          if (state is EditedExpenseState) {
+            _onEditedExpense();
           }
-          if (state is FailedCreatingExpense) {
-            _onFailedCreatingExpense();
+          if (state is FailedEditingExpenseState) {
+            _onFailedEditingExpense();
           }
         },
         child: BlocBuilder<PeopleBloc, PeopleState>(
@@ -43,7 +51,8 @@ class _AddExpensePageState extends State<AddExpensePage> {
                       child: ListView(
                           padding: const EdgeInsets.all(24.0),
                           children: [
-                            TextField(
+                            TextFormField(
+                              initialValue: widget.expenseEntity.description,
                               decoration:
                                   const InputDecoration(labelText: 'Title'),
                               onChanged: (t) {
@@ -59,7 +68,11 @@ class _AddExpensePageState extends State<AddExpensePage> {
                               children: [
                                 Expanded(
                                   flex: 4,
-                                  child: TextField(
+                                  child: TextFormField(
+                                    initialValue: widget.expenseEntity.price
+                                        .toString()
+                                        .split('.')
+                                        .first,
                                     decoration: const InputDecoration(
                                         labelText: 'Amount'),
                                     keyboardType: TextInputType.number,
@@ -75,7 +88,8 @@ class _AddExpensePageState extends State<AddExpensePage> {
                                   width: 8,
                                 ),
                                 Expanded(
-                                  child: TextField(
+                                  child: TextFormField(
+                                    initialValue: widget.expenseEntity.currency,
                                     decoration: const InputDecoration(
                                         labelText: 'Currency'),
                                     onChanged: (t) {
@@ -102,6 +116,10 @@ class _AddExpensePageState extends State<AddExpensePage> {
                                     ),
                                 loaded: (people) =>
                                     DropdownSearch<PersonEntity>(
+                                      selectedItem: PersonEntity(
+                                          id: widget.expenseEntity.personId,
+                                          displayName:
+                                              widget.expenseEntity.personName!),
                                       popupProps: const PopupProps.dialog(
                                         searchFieldProps: TextFieldProps(
                                             decoration: InputDecoration(
@@ -137,12 +155,27 @@ class _AddExpensePageState extends State<AddExpensePage> {
                               height: 8,
                             ),
                             ExpenseTypeWidget(
-                                selectedType: state.expenseType,
+                                selectedType: state.expenseType ??
+                                    widget.expenseEntity.expenseType,
                                 onChanged: (type) {
                                   context
                                       .read<ExpenseInputCubit>()
                                       .update(expenseType: type);
                                 }),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            ListTile(
+                              title: const Text('Has paid?'),
+                              trailing: Checkbox(
+                                  value: state.isPaid ??
+                                      widget.expenseEntity.isPaid == 1,
+                                  onChanged: (v) {
+                                    context
+                                        .read<ExpenseInputCubit>()
+                                        .update(isPaid: v);
+                                  }),
+                            ),
                             const SizedBox(
                               height: 8,
                             ),
@@ -155,7 +188,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                           Expanded(
                             child: ElevatedButton(
                               onPressed: () {
-                                _createExpenseHandler();
+                                _editExpenseHandler();
                               },
                               child: const Padding(
                                 padding: EdgeInsets.all(16.0),
@@ -176,10 +209,12 @@ class _AddExpensePageState extends State<AddExpensePage> {
     );
   }
 
-  void _createExpenseHandler() {
+  void _editExpenseHandler() {
     if (context.read<ExpenseInputCubit>().validate()) {
-      context.read<CreateExpenseBloc>().add(
-          CreateExpenseEvent.create(context.read<ExpenseInputCubit>().expense));
+      context.read<EditExpenseBloc>().add(EditExpenseEvent.edit(context
+          .read<ExpenseInputCubit>()
+          .expense
+          .copyWith(id: widget.expenseEntity.id)));
     } else {
       ScaffoldMessenger.of(context).showErrorSnack(
         'Please fill empty fields.',
@@ -187,19 +222,30 @@ class _AddExpensePageState extends State<AddExpensePage> {
     }
   }
 
-  void _onCreatedExpense() {
+  void _onEditedExpense() {
     context.read<ExpenseBloc>().add(const ExpenseEvent.getAll());
     if (mounted) {
       Navigator.pop(context);
     }
   }
 
-  void _onFailedCreatingExpense() {
+  void _onFailedEditingExpense() {
     ScaffoldMessenger.of(context).showErrorSnack(
-      "Couldn't create expense! try again.",
+      "Couldn't update expense! try again.",
       retry: () {
-        _createExpenseHandler();
+        _editExpenseHandler();
       },
     );
+  }
+
+  void _initInputs() {
+    context.read<ExpenseInputCubit>().update(
+          amount: widget.expenseEntity.price,
+          currency: widget.expenseEntity.currency,
+          expenseType: widget.expenseEntity.expenseType,
+          personId: widget.expenseEntity.personId,
+          personName: widget.expenseEntity.personName,
+          title: widget.expenseEntity.description,
+        );
   }
 }
