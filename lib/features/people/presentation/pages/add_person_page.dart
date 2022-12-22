@@ -6,6 +6,7 @@ import 'package:expense_manager/features/people/domain/entities/person_entity.da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/create_person_bloc.dart';
+import '../bloc/people_bloc.dart';
 
 class AddPersonPage extends StatelessWidget {
   AddPersonPage({super.key});
@@ -61,6 +62,7 @@ class AddPersonPage extends StatelessWidget {
   }
 
   void _successPersonCreationHandler(BuildContext context) {
+    context.read<PeopleBloc>().add(const PeopleEvent.getAll());
     if (ModalRoute.of(context)?.settings.name == AppRoutes.addPerson) {
       Navigator.pop(context);
     }

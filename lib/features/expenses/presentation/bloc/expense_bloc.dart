@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:expense_manager/features/expenses/domain/usecases/get_active_expenses.dart';
+import 'package:expense_manager/features/expenses/domain/usecases/get_all_expenses.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -14,7 +14,7 @@ part 'expense_bloc.freezed.dart';
 
 @injectable
 class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
-  final GetActiveExpenses getActiveExpenses;
+  final GetAllExpenses getActiveExpenses;
   ExpenseBloc(this.getActiveExpenses) : super(const _Initial()) {
     on<_GetAllExpenses>(_onGetAllExpensesHandler);
   }

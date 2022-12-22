@@ -1,25 +1,36 @@
-import 'package:expense_manager/common/app_routes.dart';
-import 'package:expense_manager/core/enums/enums.dart';
 import 'package:expense_manager/core/extensions/extensions.dart';
+import 'package:expense_manager/features/expenses/presentation/bloc/person_expense_bloc.dart';
+import 'package:expense_manager/features/people/domain/entities/person_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../common/app_routes.dart';
+import '../../../../core/enums/enums.dart';
 
-import '../bloc/expense_bloc.dart';
-
-class ExpensesPage extends StatefulWidget {
-  const ExpensesPage({super.key});
+class PersonExpensePage extends StatefulWidget {
+  const PersonExpensePage({super.key, required this.personEntity});
+  final PersonEntity personEntity;
 
   @override
-  createState() => _ExpensesPage();
+  State<PersonExpensePage> createState() => _PersonExpensePageState();
 }
 
-class _ExpensesPage extends State<ExpensesPage> {
+class _PersonExpensePageState extends State<PersonExpensePage> {
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(widget.personEntity.displayName),
+      ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.pushNamed(context, AppRoutes.addExpense);
+          Navigator.pushNamed(context, AppRoutes.addExpense,arguments: widget.personEntity);
         },
         label: Row(
           children: const [
@@ -31,13 +42,13 @@ class _ExpensesPage extends State<ExpensesPage> {
           ],
         ),
       ),
-      body: BlocListener<ExpenseBloc, ExpenseState>(
+      body: BlocListener<PersonExpenseBloc, PersonExpenseState>(
         listener: (context, state) {
-          if (state is FailedGetExpenses) {
-            _failedGetExpensesHandler(context);
+          if (state is FailedGetPersonExpenses) {
+            _failedGetPersonExpensesHandler(context);
           }
         },
-        child: BlocBuilder<ExpenseBloc, ExpenseState>(
+        child: BlocBuilder<PersonExpenseBloc, PersonExpenseState>(
           builder: (context, state) => state.maybeWhen(
             loading: () => const Center(
               child: CircularProgressIndicator(),
@@ -89,7 +100,7 @@ class _ExpensesPage extends State<ExpensesPage> {
     );
   }
 
-  void _failedGetExpensesHandler(BuildContext context) {
+  void _failedGetPersonExpensesHandler(BuildContext context) {
     ScaffoldMessenger.of(context).showErrorSnack(
       "Could't get data! try again.",
       retry: () {
@@ -99,6 +110,8 @@ class _ExpensesPage extends State<ExpensesPage> {
   }
 
   void getData() {
-    context.read<ExpenseBloc>().add(const ExpenseEvent.getAll());
+    context
+        .read<PersonExpenseBloc>()
+        .add(PersonExpenseEvent.get(widget.personEntity.id ?? 0));
   }
 }

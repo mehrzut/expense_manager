@@ -23,6 +23,7 @@ mixin _$PersonEntity {
   @JsonKey(name: '_id')
   int? get id => throw _privateConstructorUsedError;
   String get displayName => throw _privateConstructorUsedError;
+  double? get totalAmount => throw _privateConstructorUsedError;
   String? get cardNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +39,10 @@ abstract class $PersonEntityCopyWith<$Res> {
       _$PersonEntityCopyWithImpl<$Res, PersonEntity>;
   @useResult
   $Res call(
-      {@JsonKey(name: '_id') int? id, String displayName, String? cardNumber});
+      {@JsonKey(name: '_id') int? id,
+      String displayName,
+      double? totalAmount,
+      String? cardNumber});
 }
 
 /// @nodoc
@@ -56,6 +60,7 @@ class _$PersonEntityCopyWithImpl<$Res, $Val extends PersonEntity>
   $Res call({
     Object? id = freezed,
     Object? displayName = null,
+    Object? totalAmount = freezed,
     Object? cardNumber = freezed,
   }) {
     return _then(_value.copyWith(
@@ -67,6 +72,10 @@ class _$PersonEntityCopyWithImpl<$Res, $Val extends PersonEntity>
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
               as String,
+      totalAmount: freezed == totalAmount
+          ? _value.totalAmount
+          : totalAmount // ignore: cast_nullable_to_non_nullable
+              as double?,
       cardNumber: freezed == cardNumber
           ? _value.cardNumber
           : cardNumber // ignore: cast_nullable_to_non_nullable
@@ -84,7 +93,10 @@ abstract class _$$_PersonEntityCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: '_id') int? id, String displayName, String? cardNumber});
+      {@JsonKey(name: '_id') int? id,
+      String displayName,
+      double? totalAmount,
+      String? cardNumber});
 }
 
 /// @nodoc
@@ -100,6 +112,7 @@ class __$$_PersonEntityCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? displayName = null,
+    Object? totalAmount = freezed,
     Object? cardNumber = freezed,
   }) {
     return _then(_$_PersonEntity(
@@ -111,6 +124,10 @@ class __$$_PersonEntityCopyWithImpl<$Res>
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
               as String,
+      totalAmount: freezed == totalAmount
+          ? _value.totalAmount
+          : totalAmount // ignore: cast_nullable_to_non_nullable
+              as double?,
       cardNumber: freezed == cardNumber
           ? _value.cardNumber
           : cardNumber // ignore: cast_nullable_to_non_nullable
@@ -125,6 +142,7 @@ class _$_PersonEntity extends _PersonEntity {
   _$_PersonEntity(
       {@JsonKey(name: '_id') this.id,
       required this.displayName,
+      this.totalAmount,
       this.cardNumber})
       : super._();
 
@@ -137,11 +155,13 @@ class _$_PersonEntity extends _PersonEntity {
   @override
   final String displayName;
   @override
+  final double? totalAmount;
+  @override
   final String? cardNumber;
 
   @override
   String toString() {
-    return 'PersonEntity(id: $id, displayName: $displayName, cardNumber: $cardNumber)';
+    return 'PersonEntity(id: $id, displayName: $displayName, totalAmount: $totalAmount, cardNumber: $cardNumber)';
   }
 
   @override
@@ -152,13 +172,16 @@ class _$_PersonEntity extends _PersonEntity {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.displayName, displayName) ||
                 other.displayName == displayName) &&
+            (identical(other.totalAmount, totalAmount) ||
+                other.totalAmount == totalAmount) &&
             (identical(other.cardNumber, cardNumber) ||
                 other.cardNumber == cardNumber));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, displayName, cardNumber);
+  int get hashCode =>
+      Object.hash(runtimeType, id, displayName, totalAmount, cardNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -178,6 +201,7 @@ abstract class _PersonEntity extends PersonEntity {
   factory _PersonEntity(
       {@JsonKey(name: '_id') final int? id,
       required final String displayName,
+      final double? totalAmount,
       final String? cardNumber}) = _$_PersonEntity;
   _PersonEntity._() : super._();
 
@@ -189,6 +213,8 @@ abstract class _PersonEntity extends PersonEntity {
   int? get id;
   @override
   String get displayName;
+  @override
+  double? get totalAmount;
   @override
   String? get cardNumber;
   @override

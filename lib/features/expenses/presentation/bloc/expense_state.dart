@@ -5,5 +5,5 @@ class ExpenseState with _$ExpenseState {
   const factory ExpenseState.initial() = _Initial;
   const factory ExpenseState.loading() = _Loading;
   const factory ExpenseState.loaded(List<ExpenseEntity> expenses) = _Loaded;
-  const factory ExpenseState.failed(String error) = FailedGetActiveExpenses;
+  const factory ExpenseState.failed(String error) = FailedGetExpenses;
 }

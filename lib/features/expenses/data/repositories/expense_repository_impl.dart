@@ -11,8 +11,8 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
   ExpenseRepositoryImpl(this.dataSource);
 
   @override
-  Future<List<ExpenseEntity>> getActiveExpenses() {
-    return dataSource.getActiveExpenses();
+  Future<List<ExpenseEntity>> getAllExpenses() {
+    return dataSource.getAllExpenses();
   }
 
   @override
@@ -23,5 +23,10 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
   @override
   Future<void> updateExpense(ExpenseEntity expense) {
     return dataSource.updateExpense(expense);
+  }
+
+  @override
+  Future<List<ExpenseEntity>> getPersonExpenses(int id) {
+    return dataSource.getPersonExpenses(id);
   }
 }

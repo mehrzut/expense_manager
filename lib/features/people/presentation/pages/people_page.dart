@@ -1,6 +1,8 @@
 import 'package:expense_manager/common/app_routes.dart';
 import 'package:expense_manager/core/extensions/extensions.dart';
+import 'package:expense_manager/features/people/domain/entities/person_entity.dart';
 import 'package:expense_manager/features/people/presentation/bloc/people_bloc.dart';
+import 'package:expense_manager/features/people/presentation/pages/person_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/create_person_bloc.dart';
@@ -45,16 +47,8 @@ class PeoplePage extends StatelessWidget {
               loaded: (people) => people.isNotEmpty
                   ? ListView.builder(
                       itemCount: people.length,
-                      itemBuilder: (context, index) => Card(
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            child: Center(
-                              child: Text(people[index].id.toString()),
-                            ),
-                          ),
-                          title: Text(people[index].displayName),
-                        ),
-                      ),
+                      itemBuilder: (context, index) =>
+                          PersonItem(person: people[index]),
                     )
                   : const Center(
                       child: Text('List is empty!'),

@@ -24,7 +24,6 @@ mixin _$ExpenseEntity {
   int? get id => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
-  String get currency => throw _privateConstructorUsedError;
   String? get personName => throw _privateConstructorUsedError;
   int? get personId => throw _privateConstructorUsedError;
   ExpenseType get expenseType => throw _privateConstructorUsedError;
@@ -46,7 +45,6 @@ abstract class $ExpenseEntityCopyWith<$Res> {
       {@JsonKey(name: '_id') int? id,
       String description,
       double price,
-      String currency,
       String? personName,
       int? personId,
       ExpenseType expenseType,
@@ -69,7 +67,6 @@ class _$ExpenseEntityCopyWithImpl<$Res, $Val extends ExpenseEntity>
     Object? id = freezed,
     Object? description = null,
     Object? price = null,
-    Object? currency = null,
     Object? personName = freezed,
     Object? personId = freezed,
     Object? expenseType = null,
@@ -88,10 +85,6 @@ class _$ExpenseEntityCopyWithImpl<$Res, $Val extends ExpenseEntity>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
       personName: freezed == personName
           ? _value.personName
           : personName // ignore: cast_nullable_to_non_nullable
@@ -124,7 +117,6 @@ abstract class _$$_ExpenseEntityCopyWith<$Res>
       {@JsonKey(name: '_id') int? id,
       String description,
       double price,
-      String currency,
       String? personName,
       int? personId,
       ExpenseType expenseType,
@@ -145,7 +137,6 @@ class __$$_ExpenseEntityCopyWithImpl<$Res>
     Object? id = freezed,
     Object? description = null,
     Object? price = null,
-    Object? currency = null,
     Object? personName = freezed,
     Object? personId = freezed,
     Object? expenseType = null,
@@ -164,10 +155,6 @@ class __$$_ExpenseEntityCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
       personName: freezed == personName
           ? _value.personName
           : personName // ignore: cast_nullable_to_non_nullable
@@ -195,7 +182,6 @@ class _$_ExpenseEntity extends _ExpenseEntity {
       {@JsonKey(name: '_id') this.id,
       required this.description,
       required this.price,
-      required this.currency,
       this.personName,
       this.personId,
       required this.expenseType,
@@ -213,8 +199,6 @@ class _$_ExpenseEntity extends _ExpenseEntity {
   @override
   final double price;
   @override
-  final String currency;
-  @override
   final String? personName;
   @override
   final int? personId;
@@ -226,7 +210,7 @@ class _$_ExpenseEntity extends _ExpenseEntity {
 
   @override
   String toString() {
-    return 'ExpenseEntity(id: $id, description: $description, price: $price, currency: $currency, personName: $personName, personId: $personId, expenseType: $expenseType, isPaid: $isPaid)';
+    return 'ExpenseEntity(id: $id, description: $description, price: $price, personName: $personName, personId: $personId, expenseType: $expenseType, isPaid: $isPaid)';
   }
 
   @override
@@ -238,8 +222,6 @@ class _$_ExpenseEntity extends _ExpenseEntity {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.price, price) || other.price == price) &&
-            (identical(other.currency, currency) ||
-                other.currency == currency) &&
             (identical(other.personName, personName) ||
                 other.personName == personName) &&
             (identical(other.personId, personId) ||
@@ -251,7 +233,7 @@ class _$_ExpenseEntity extends _ExpenseEntity {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, description, price, currency,
+  int get hashCode => Object.hash(runtimeType, id, description, price,
       personName, personId, expenseType, isPaid);
 
   @JsonKey(ignore: true)
@@ -273,7 +255,6 @@ abstract class _ExpenseEntity extends ExpenseEntity {
       {@JsonKey(name: '_id') final int? id,
       required final String description,
       required final double price,
-      required final String currency,
       final String? personName,
       final int? personId,
       required final ExpenseType expenseType,
@@ -290,8 +271,6 @@ abstract class _ExpenseEntity extends ExpenseEntity {
   String get description;
   @override
   double get price;
-  @override
-  String get currency;
   @override
   String? get personName;
   @override

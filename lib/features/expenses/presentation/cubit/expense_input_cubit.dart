@@ -22,7 +22,6 @@ class ExpenseInputCubit extends Cubit<ExpenseInputState> {
   ExpenseEntity get expense => ExpenseEntity(
       description: state.title!,
       price: state.amount!,
-      currency: state.currency!,
       expenseType: state.expenseType!,
       personId: state.personId,
       personName: state.personName,
@@ -31,7 +30,6 @@ class ExpenseInputCubit extends Cubit<ExpenseInputState> {
   void update({
     String? title,
     double? amount,
-    String? currency,
     String? personName,
     int? personId,
     ExpenseType? expenseType,
@@ -42,9 +40,6 @@ class ExpenseInputCubit extends Cubit<ExpenseInputState> {
     }
     if (amount != null) {
       emit(state.copyWith(amount: amount));
-    }
-    if (currency != null) {
-      emit(state.copyWith(currency: currency));
     }
     if (personId != null) {
       emit(state.copyWith(personId: personId));
@@ -62,8 +57,6 @@ class ExpenseInputCubit extends Cubit<ExpenseInputState> {
 
   bool validate() {
     return state.amount != null &&
-        state.currency != null &&
-        state.currency!.isNotEmpty &&
         state.expenseType != null &&
         state.personId != null &&
         state.personName != null &&

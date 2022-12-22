@@ -12,7 +12,7 @@ class ExpenseTypeWidget extends StatelessWidget {
     return Row(
       children: [
         _TypeButton(
-          borderRadius: BorderRadius.horizontal(
+          borderRadius: const BorderRadius.horizontal(
             left: Radius.circular(12),
           ),
           text: 'Debt',
@@ -21,11 +21,11 @@ class ExpenseTypeWidget extends StatelessWidget {
             onChanged(ExpenseType.debt);
           },
         ),
-        SizedBox(
+        const SizedBox(
           width: 1,
         ),
         _TypeButton(
-          borderRadius: BorderRadius.horizontal(
+          borderRadius: const BorderRadius.horizontal(
             right: Radius.circular(12),
           ),
           text: 'Credit',

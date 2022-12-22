@@ -1,4 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:expense_manager/common/app_routes.dart';
 import 'package:expense_manager/core/extensions/extensions.dart';
 import 'package:expense_manager/features/expenses/presentation/bloc/create_expense_bloc.dart';
 import 'package:expense_manager/features/expenses/presentation/bloc/expense_bloc.dart';
@@ -11,13 +12,22 @@ import '../../../people/presentation/bloc/people_bloc.dart';
 import '../widgets/expense_type_widget.dart';
 
 class AddExpensePage extends StatefulWidget {
-  const AddExpensePage({super.key});
+  const AddExpensePage({super.key, required this.personEntity});
+  final PersonEntity? personEntity;
 
   @override
   State<AddExpensePage> createState() => _AddExpensePageState();
 }
 
 class _AddExpensePageState extends State<AddExpensePage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ExpenseInputCubit>().update(
+        personName: widget.personEntity?.displayName,
+        personId: widget.personEntity?.id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,30 +68,17 @@ class _AddExpensePageState extends State<AddExpensePage> {
                             Row(
                               children: [
                                 Expanded(
-                                  flex: 4,
                                   child: TextField(
                                     decoration: const InputDecoration(
-                                        labelText: 'Amount'),
+                                      labelText: 'Amount',
+                                      suffixText: 'T',
+                                    ),
                                     keyboardType: TextInputType.number,
                                     onChanged: (t) {
                                       final amount = double.tryParse(t);
                                       context
                                           .read<ExpenseInputCubit>()
                                           .update(amount: amount);
-                                    },
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                Expanded(
-                                  child: TextField(
-                                    decoration: const InputDecoration(
-                                        labelText: 'Currency'),
-                                    onChanged: (t) {
-                                      context
-                                          .read<ExpenseInputCubit>()
-                                          .update(currency: t);
                                     },
                                   ),
                                 ),
@@ -100,32 +97,45 @@ class _AddExpensePageState extends State<AddExpensePage> {
                                 loading: () => const Center(
                                       child: CircularProgressIndicator(),
                                     ),
-                                loaded: (people) =>
-                                    DropdownSearch<PersonEntity>(
-                                      popupProps: const PopupProps.dialog(
-                                        searchFieldProps: TextFieldProps(
-                                            decoration: InputDecoration(
-                                                hintText: 'Search people...')),
-                                        showSearchBox: true,
-                                      ),
-                                      dropdownDecoratorProps:
-                                          const DropDownDecoratorProps(
-                                        dropdownSearchDecoration:
-                                            InputDecoration(
-                                          labelText: "Person",
+                                loaded: (people) => Row(
+                                      children: [
+                                        Expanded(
+                                          child: DropdownSearch<PersonEntity>(
+                                            popupProps: const PopupProps.dialog(
+                                              searchFieldProps: TextFieldProps(
+                                                  decoration: InputDecoration(
+                                                      hintText:
+                                                          'Search people...')),
+                                              showSearchBox: true,
+                                            ),
+                                            dropdownDecoratorProps:
+                                                const DropDownDecoratorProps(
+                                              dropdownSearchDecoration:
+                                                  InputDecoration(
+                                                labelText: "Person",
+                                              ),
+                                            ),
+                                            selectedItem: widget.personEntity,
+                                            items: people,
+                                            itemAsString: (item) =>
+                                                item.displayName,
+                                            onChanged: (value) {
+                                              context
+                                                  .read<ExpenseInputCubit>()
+                                                  .update(
+                                                      personId: value!.id,
+                                                      personName:
+                                                          value.displayName);
+                                            },
+                                          ),
                                         ),
-                                      ),
-                                      items: people,
-                                      itemAsString: (item) => item.displayName,
-                                      onChanged: (value) {
-                                        context
-                                            .read<ExpenseInputCubit>()
-                                            .update(personId: value!.id);
-                                        context
-                                            .read<ExpenseInputCubit>()
-                                            .update(
-                                                personName: value.displayName);
-                                      },
+                                        IconButton(
+                                            onPressed: () {
+                                              Navigator.pushNamed(
+                                                  context, AppRoutes.addPerson);
+                                            },
+                                            icon: const Icon(Icons.add))
+                                      ],
                                     ),
                                 failed: (message) {
                                   context

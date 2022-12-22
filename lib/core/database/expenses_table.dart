@@ -8,7 +8,6 @@ class ExpensesTable implements DataBaseTable<ExpenseEntity> {
   static const columnId = '_id';
   static const columnDescription = 'description';
   static const columnPrice = 'price';
-  static const columnCurrency = 'currency';
   static const columnPersonName = 'personName';
   static const columnPersonId = 'personId';
   static const columnExpenseType = 'expenseType';
@@ -17,7 +16,7 @@ class ExpensesTable implements DataBaseTable<ExpenseEntity> {
   @override
   Future<void> create(Database db) async {
     return await db.execute(
-        'CREATE TABLE $tableName ($columnId INTEGER PRIMARY KEY AUTOINCREMENT, $columnDescription TEXT, $columnCurrency TEXT, $columnPrice REAL, $columnPersonName TEXT, $columnExpenseType TEXT, $columnPersonId INTEGER, $columnIsPaid INTEGER)');
+        'CREATE TABLE $tableName ($columnId INTEGER PRIMARY KEY AUTOINCREMENT, $columnDescription TEXT, $columnPrice REAL, $columnPersonName TEXT, $columnExpenseType TEXT, $columnPersonId INTEGER, $columnIsPaid INTEGER)');
   }
 
   @override
@@ -49,6 +48,6 @@ class ExpensesTable implements DataBaseTable<ExpenseEntity> {
   Future<void> update(Database db, ExpenseEntity data) {
     Map<String, dynamic> map = data.toJsonWithoutNull();
     map.remove('_id');
-    return db.update(tableName, map, where: '_id = ?', whereArgs: [data.id]);
+    return db.update(tableName, map, where: '$columnId = ?', whereArgs: [data.id]);
   }
 }

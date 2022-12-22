@@ -11,9 +11,12 @@ class ExpenseDataSourceImpl implements ExpenseDataSource {
   ExpenseDataSourceImpl(this.dataBaseHelper);
 
   @override
-  Future<List<ExpenseEntity>> getActiveExpenses() async {
-    final allExpenses = await dataBaseHelper.getAllExpenses();
-    return allExpenses.where((element) => element.isPaid == 0).toList();
+  Future<List<ExpenseEntity>> getAllExpenses() async {
+    List<ExpenseEntity> allExpenses = await dataBaseHelper.getAllExpenses();
+    allExpenses.sort(
+      (a, b) => a.isPaid.compareTo(b.isPaid),
+    );
+    return allExpenses;
   }
 
   @override
@@ -24,5 +27,11 @@ class ExpenseDataSourceImpl implements ExpenseDataSource {
   @override
   Future<void> updateExpense(ExpenseEntity expense) {
     return dataBaseHelper.updateExpense(expense);
+  }
+
+  @override
+  Future<List<ExpenseEntity>> getPersonExpenses(int id) async {
+    final allExpenses = await getAllExpenses();
+    return allExpenses.where((element) => element.personId == id).toList();
   }
 }

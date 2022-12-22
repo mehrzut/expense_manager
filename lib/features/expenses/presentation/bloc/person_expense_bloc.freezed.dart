@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'expense_bloc.dart';
+part of 'person_expense_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,118 +15,166 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$ExpenseEvent {
+mixin _$PersonExpenseEvent {
+  int get id => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getAll,
+    required TResult Function(int id) get,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getAll,
+    TResult? Function(int id)? get,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getAll,
+    TResult Function(int id)? get,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetAllExpenses value) getAll,
+    required TResult Function(_GetPersonExpense value) get,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetAllExpenses value)? getAll,
+    TResult? Function(_GetPersonExpense value)? get,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetAllExpenses value)? getAll,
+    TResult Function(_GetPersonExpense value)? get,
     required TResult orElse(),
   }) =>
+      throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $PersonExpenseEventCopyWith<PersonExpenseEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ExpenseEventCopyWith<$Res> {
-  factory $ExpenseEventCopyWith(
-          ExpenseEvent value, $Res Function(ExpenseEvent) then) =
-      _$ExpenseEventCopyWithImpl<$Res, ExpenseEvent>;
+abstract class $PersonExpenseEventCopyWith<$Res> {
+  factory $PersonExpenseEventCopyWith(
+          PersonExpenseEvent value, $Res Function(PersonExpenseEvent) then) =
+      _$PersonExpenseEventCopyWithImpl<$Res, PersonExpenseEvent>;
+  @useResult
+  $Res call({int id});
 }
 
 /// @nodoc
-class _$ExpenseEventCopyWithImpl<$Res, $Val extends ExpenseEvent>
-    implements $ExpenseEventCopyWith<$Res> {
-  _$ExpenseEventCopyWithImpl(this._value, this._then);
+class _$PersonExpenseEventCopyWithImpl<$Res, $Val extends PersonExpenseEvent>
+    implements $PersonExpenseEventCopyWith<$Res> {
+  _$PersonExpenseEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$_GetAllExpensesCopyWith<$Res> {
-  factory _$$_GetAllExpensesCopyWith(
-          _$_GetAllExpenses value, $Res Function(_$_GetAllExpenses) then) =
-      __$$_GetAllExpensesCopyWithImpl<$Res>;
+abstract class _$$_GetPersonExpenseCopyWith<$Res>
+    implements $PersonExpenseEventCopyWith<$Res> {
+  factory _$$_GetPersonExpenseCopyWith(
+          _$_GetPersonExpense value, $Res Function(_$_GetPersonExpense) then) =
+      __$$_GetPersonExpenseCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int id});
 }
 
 /// @nodoc
-class __$$_GetAllExpensesCopyWithImpl<$Res>
-    extends _$ExpenseEventCopyWithImpl<$Res, _$_GetAllExpenses>
-    implements _$$_GetAllExpensesCopyWith<$Res> {
-  __$$_GetAllExpensesCopyWithImpl(
-      _$_GetAllExpenses _value, $Res Function(_$_GetAllExpenses) _then)
+class __$$_GetPersonExpenseCopyWithImpl<$Res>
+    extends _$PersonExpenseEventCopyWithImpl<$Res, _$_GetPersonExpense>
+    implements _$$_GetPersonExpenseCopyWith<$Res> {
+  __$$_GetPersonExpenseCopyWithImpl(
+      _$_GetPersonExpense _value, $Res Function(_$_GetPersonExpense) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$_GetPersonExpense(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_GetAllExpenses implements _GetAllExpenses {
-  const _$_GetAllExpenses();
+class _$_GetPersonExpense implements _GetPersonExpense {
+  const _$_GetPersonExpense(this.id);
+
+  @override
+  final int id;
 
   @override
   String toString() {
-    return 'ExpenseEvent.getAll()';
+    return 'PersonExpenseEvent.get(id: $id)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_GetAllExpenses);
+        (other.runtimeType == runtimeType &&
+            other is _$_GetPersonExpense &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetPersonExpenseCopyWith<_$_GetPersonExpense> get copyWith =>
+      __$$_GetPersonExpenseCopyWithImpl<_$_GetPersonExpense>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getAll,
+    required TResult Function(int id) get,
   }) {
-    return getAll();
+    return get(id);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getAll,
+    TResult? Function(int id)? get,
   }) {
-    return getAll?.call();
+    return get?.call(id);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getAll,
+    TResult Function(int id)? get,
     required TResult orElse(),
   }) {
-    if (getAll != null) {
-      return getAll();
+    if (get != null) {
+      return get(id);
     }
     return orElse();
   }
@@ -134,38 +182,45 @@ class _$_GetAllExpenses implements _GetAllExpenses {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetAllExpenses value) getAll,
+    required TResult Function(_GetPersonExpense value) get,
   }) {
-    return getAll(this);
+    return get(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetAllExpenses value)? getAll,
+    TResult? Function(_GetPersonExpense value)? get,
   }) {
-    return getAll?.call(this);
+    return get?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetAllExpenses value)? getAll,
+    TResult Function(_GetPersonExpense value)? get,
     required TResult orElse(),
   }) {
-    if (getAll != null) {
-      return getAll(this);
+    if (get != null) {
+      return get(this);
     }
     return orElse();
   }
 }
 
-abstract class _GetAllExpenses implements ExpenseEvent {
-  const factory _GetAllExpenses() = _$_GetAllExpenses;
+abstract class _GetPersonExpense implements PersonExpenseEvent {
+  const factory _GetPersonExpense(final int id) = _$_GetPersonExpense;
+
+  @override
+  int get id;
+  @override
+  @JsonKey(ignore: true)
+  _$$_GetPersonExpenseCopyWith<_$_GetPersonExpense> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-mixin _$ExpenseState {
+mixin _$PersonExpenseState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -196,7 +251,7 @@ mixin _$ExpenseState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
-    required TResult Function(FailedGetExpenses value) failed,
+    required TResult Function(FailedGetPersonExpenses value) failed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -204,7 +259,7 @@ mixin _$ExpenseState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
-    TResult? Function(FailedGetExpenses value)? failed,
+    TResult? Function(FailedGetPersonExpenses value)? failed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -212,23 +267,23 @@ mixin _$ExpenseState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
-    TResult Function(FailedGetExpenses value)? failed,
+    TResult Function(FailedGetPersonExpenses value)? failed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ExpenseStateCopyWith<$Res> {
-  factory $ExpenseStateCopyWith(
-          ExpenseState value, $Res Function(ExpenseState) then) =
-      _$ExpenseStateCopyWithImpl<$Res, ExpenseState>;
+abstract class $PersonExpenseStateCopyWith<$Res> {
+  factory $PersonExpenseStateCopyWith(
+          PersonExpenseState value, $Res Function(PersonExpenseState) then) =
+      _$PersonExpenseStateCopyWithImpl<$Res, PersonExpenseState>;
 }
 
 /// @nodoc
-class _$ExpenseStateCopyWithImpl<$Res, $Val extends ExpenseState>
-    implements $ExpenseStateCopyWith<$Res> {
-  _$ExpenseStateCopyWithImpl(this._value, this._then);
+class _$PersonExpenseStateCopyWithImpl<$Res, $Val extends PersonExpenseState>
+    implements $PersonExpenseStateCopyWith<$Res> {
+  _$PersonExpenseStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -245,7 +300,7 @@ abstract class _$$_InitialCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitialCopyWithImpl<$Res>
-    extends _$ExpenseStateCopyWithImpl<$Res, _$_Initial>
+    extends _$PersonExpenseStateCopyWithImpl<$Res, _$_Initial>
     implements _$$_InitialCopyWith<$Res> {
   __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
       : super(_value, _then);
@@ -258,7 +313,7 @@ class _$_Initial implements _Initial {
 
   @override
   String toString() {
-    return 'ExpenseState.initial()';
+    return 'PersonExpenseState.initial()';
   }
 
   @override
@@ -313,7 +368,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
-    required TResult Function(FailedGetExpenses value) failed,
+    required TResult Function(FailedGetPersonExpenses value) failed,
   }) {
     return initial(this);
   }
@@ -324,7 +379,7 @@ class _$_Initial implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
-    TResult? Function(FailedGetExpenses value)? failed,
+    TResult? Function(FailedGetPersonExpenses value)? failed,
   }) {
     return initial?.call(this);
   }
@@ -335,7 +390,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
-    TResult Function(FailedGetExpenses value)? failed,
+    TResult Function(FailedGetPersonExpenses value)? failed,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -345,7 +400,7 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements ExpenseState {
+abstract class _Initial implements PersonExpenseState {
   const factory _Initial() = _$_Initial;
 }
 
@@ -358,7 +413,7 @@ abstract class _$$_LoadingCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoadingCopyWithImpl<$Res>
-    extends _$ExpenseStateCopyWithImpl<$Res, _$_Loading>
+    extends _$PersonExpenseStateCopyWithImpl<$Res, _$_Loading>
     implements _$$_LoadingCopyWith<$Res> {
   __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
       : super(_value, _then);
@@ -371,7 +426,7 @@ class _$_Loading implements _Loading {
 
   @override
   String toString() {
-    return 'ExpenseState.loading()';
+    return 'PersonExpenseState.loading()';
   }
 
   @override
@@ -426,7 +481,7 @@ class _$_Loading implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
-    required TResult Function(FailedGetExpenses value) failed,
+    required TResult Function(FailedGetPersonExpenses value) failed,
   }) {
     return loading(this);
   }
@@ -437,7 +492,7 @@ class _$_Loading implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
-    TResult? Function(FailedGetExpenses value)? failed,
+    TResult? Function(FailedGetPersonExpenses value)? failed,
   }) {
     return loading?.call(this);
   }
@@ -448,7 +503,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
-    TResult Function(FailedGetExpenses value)? failed,
+    TResult Function(FailedGetPersonExpenses value)? failed,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -458,7 +513,7 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements ExpenseState {
+abstract class _Loading implements PersonExpenseState {
   const factory _Loading() = _$_Loading;
 }
 
@@ -472,7 +527,7 @@ abstract class _$$_LoadedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoadedCopyWithImpl<$Res>
-    extends _$ExpenseStateCopyWithImpl<$Res, _$_Loaded>
+    extends _$PersonExpenseStateCopyWithImpl<$Res, _$_Loaded>
     implements _$$_LoadedCopyWith<$Res> {
   __$$_LoadedCopyWithImpl(_$_Loaded _value, $Res Function(_$_Loaded) _then)
       : super(_value, _then);
@@ -505,7 +560,7 @@ class _$_Loaded implements _Loaded {
 
   @override
   String toString() {
-    return 'ExpenseState.loaded(expenses: $expenses)';
+    return 'PersonExpenseState.loaded(expenses: $expenses)';
   }
 
   @override
@@ -569,7 +624,7 @@ class _$_Loaded implements _Loaded {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
-    required TResult Function(FailedGetExpenses value) failed,
+    required TResult Function(FailedGetPersonExpenses value) failed,
   }) {
     return loaded(this);
   }
@@ -580,7 +635,7 @@ class _$_Loaded implements _Loaded {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
-    TResult? Function(FailedGetExpenses value)? failed,
+    TResult? Function(FailedGetPersonExpenses value)? failed,
   }) {
     return loaded?.call(this);
   }
@@ -591,7 +646,7 @@ class _$_Loaded implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
-    TResult Function(FailedGetExpenses value)? failed,
+    TResult Function(FailedGetPersonExpenses value)? failed,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -601,7 +656,7 @@ class _$_Loaded implements _Loaded {
   }
 }
 
-abstract class _Loaded implements ExpenseState {
+abstract class _Loaded implements PersonExpenseState {
   const factory _Loaded(final List<ExpenseEntity> expenses) = _$_Loaded;
 
   List<ExpenseEntity> get expenses;
@@ -611,20 +666,20 @@ abstract class _Loaded implements ExpenseState {
 }
 
 /// @nodoc
-abstract class _$$FailedGetExpensesCopyWith<$Res> {
-  factory _$$FailedGetExpensesCopyWith(
-          _$FailedGetExpenses value, $Res Function(_$FailedGetExpenses) then) =
-      __$$FailedGetExpensesCopyWithImpl<$Res>;
+abstract class _$$FailedGetPersonExpensesCopyWith<$Res> {
+  factory _$$FailedGetPersonExpensesCopyWith(_$FailedGetPersonExpenses value,
+          $Res Function(_$FailedGetPersonExpenses) then) =
+      __$$FailedGetPersonExpensesCopyWithImpl<$Res>;
   @useResult
   $Res call({String error});
 }
 
 /// @nodoc
-class __$$FailedGetExpensesCopyWithImpl<$Res>
-    extends _$ExpenseStateCopyWithImpl<$Res, _$FailedGetExpenses>
-    implements _$$FailedGetExpensesCopyWith<$Res> {
-  __$$FailedGetExpensesCopyWithImpl(
-      _$FailedGetExpenses _value, $Res Function(_$FailedGetExpenses) _then)
+class __$$FailedGetPersonExpensesCopyWithImpl<$Res>
+    extends _$PersonExpenseStateCopyWithImpl<$Res, _$FailedGetPersonExpenses>
+    implements _$$FailedGetPersonExpensesCopyWith<$Res> {
+  __$$FailedGetPersonExpensesCopyWithImpl(_$FailedGetPersonExpenses _value,
+      $Res Function(_$FailedGetPersonExpenses) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -632,7 +687,7 @@ class __$$FailedGetExpensesCopyWithImpl<$Res>
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$FailedGetExpenses(
+    return _then(_$FailedGetPersonExpenses(
       null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -643,22 +698,22 @@ class __$$FailedGetExpensesCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FailedGetExpenses implements FailedGetExpenses {
-  const _$FailedGetExpenses(this.error);
+class _$FailedGetPersonExpenses implements FailedGetPersonExpenses {
+  const _$FailedGetPersonExpenses(this.error);
 
   @override
   final String error;
 
   @override
   String toString() {
-    return 'ExpenseState.failed(error: $error)';
+    return 'PersonExpenseState.failed(error: $error)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FailedGetExpenses &&
+            other is _$FailedGetPersonExpenses &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -668,8 +723,9 @@ class _$FailedGetExpenses implements FailedGetExpenses {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FailedGetExpensesCopyWith<_$FailedGetExpenses> get copyWith =>
-      __$$FailedGetExpensesCopyWithImpl<_$FailedGetExpenses>(this, _$identity);
+  _$$FailedGetPersonExpensesCopyWith<_$FailedGetPersonExpenses> get copyWith =>
+      __$$FailedGetPersonExpensesCopyWithImpl<_$FailedGetPersonExpenses>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -714,7 +770,7 @@ class _$FailedGetExpenses implements FailedGetExpenses {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
-    required TResult Function(FailedGetExpenses value) failed,
+    required TResult Function(FailedGetPersonExpenses value) failed,
   }) {
     return failed(this);
   }
@@ -725,7 +781,7 @@ class _$FailedGetExpenses implements FailedGetExpenses {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
-    TResult? Function(FailedGetExpenses value)? failed,
+    TResult? Function(FailedGetPersonExpenses value)? failed,
   }) {
     return failed?.call(this);
   }
@@ -736,7 +792,7 @@ class _$FailedGetExpenses implements FailedGetExpenses {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
-    TResult Function(FailedGetExpenses value)? failed,
+    TResult Function(FailedGetPersonExpenses value)? failed,
     required TResult orElse(),
   }) {
     if (failed != null) {
@@ -746,11 +802,12 @@ class _$FailedGetExpenses implements FailedGetExpenses {
   }
 }
 
-abstract class FailedGetExpenses implements ExpenseState {
-  const factory FailedGetExpenses(final String error) = _$FailedGetExpenses;
+abstract class FailedGetPersonExpenses implements PersonExpenseState {
+  const factory FailedGetPersonExpenses(final String error) =
+      _$FailedGetPersonExpenses;
 
   String get error;
   @JsonKey(ignore: true)
-  _$$FailedGetExpensesCopyWith<_$FailedGetExpenses> get copyWith =>
+  _$$FailedGetPersonExpensesCopyWith<_$FailedGetPersonExpenses> get copyWith =>
       throw _privateConstructorUsedError;
 }

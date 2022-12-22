@@ -4,12 +4,12 @@ import 'package:expense_manager/features/expenses/domain/repositories/expense_re
 import 'package:injectable/injectable.dart';
 
 @singleton
-class GetActiveExpenses extends UseCase<List<ExpenseEntity>, void> {
+class GetAllExpenses extends UseCase<List<ExpenseEntity>, void> {
   final ExpenseRepository repository;
-  GetActiveExpenses(this.repository);
+  GetAllExpenses(this.repository);
 
   @override
   Future<List<ExpenseEntity>> call(void params) {
-    return repository.getActiveExpenses();
+    return repository.getAllExpenses();
   }
 }

@@ -6,6 +6,7 @@ import 'package:expense_manager/features/expenses/presentation/cubit/expense_inp
 import 'package:expense_manager/features/expenses/presentation/pages/add_expense_page.dart';
 import 'package:expense_manager/features/expenses/presentation/pages/expense_detail_page.dart';
 import 'package:expense_manager/features/home/presentation/pages/home_page.dart';
+import 'package:expense_manager/features/people/domain/entities/person_entity.dart';
 import 'package:expense_manager/features/people/presentation/bloc/people_bloc.dart';
 import 'package:expense_manager/features/people/presentation/pages/add_person_page.dart';
 import 'package:expense_manager/locator.dart';
@@ -16,6 +17,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'features/expenses/presentation/bloc/create_expense_bloc.dart';
 import 'features/expenses/presentation/bloc/expense_bloc.dart';
+import 'features/expenses/presentation/bloc/person_expense_bloc.dart';
+import 'features/expenses/presentation/pages/person_expense_page.dart';
 import 'features/people/presentation/bloc/create_person_bloc.dart';
 
 void main() async {
@@ -57,7 +60,10 @@ class MyApp extends StatelessWidget {
                     create: (context) => getIt(),
                   ),
                 ],
-                child: const AddExpensePage(),
+                child:  AddExpensePage(
+                     personEntity: ModalRoute.of(context)!.settings.arguments
+                      as PersonEntity?,
+                ),
               ),
           AppRoutes.expenseDetail: (context) => MultiBlocProvider(
                 providers: [
@@ -72,7 +78,15 @@ class MyApp extends StatelessWidget {
                     expenseEntity: ModalRoute.of(context)!.settings.arguments
                         as ExpenseEntity),
               ),
-          AppRoutes.addPerson: (context) => AddPersonPage(),
+          AppRoutes.addPerson: (context) => AddPersonPage(
+          ),
+          AppRoutes.personExpense: (context) => BlocProvider<PersonExpenseBloc>(
+                create: (context) => getIt(),
+                child: PersonExpensePage(
+                  personEntity: ModalRoute.of(context)!.settings.arguments
+                      as PersonEntity,
+                ),
+              ),
         },
       ),
     );
