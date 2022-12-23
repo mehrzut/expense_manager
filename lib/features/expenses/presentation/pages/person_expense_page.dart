@@ -26,7 +26,6 @@ class _PersonExpensePageState extends State<PersonExpensePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Text(widget.personEntity.displayName),
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -70,7 +69,7 @@ class _PersonExpensePageState extends State<PersonExpensePage> {
                           title: Text(
                               '${expenses[index].description} - ${expenses[index].personName ?? ''}'),
                           trailing: Text(
-                            '${expenses[index].price.toStringAsFixed(0)} ${Strings.of(context).currency_symbol}',
+                            '${expenses[index].price.toStringAsFixed(0).threeDigit} ${Strings.of(context).currency_symbol}',
                             style: TextStyle(
                               color: expenses[index].expenseType ==
                                       ExpenseType.credit

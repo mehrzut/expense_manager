@@ -71,10 +71,13 @@ class _ExpenseDetailPageState extends State<ExpenseDetailPage> {
                                 Expanded(
                                   child: TextFormField(
                                     initialValue: widget.expenseEntity.price
-                                        .toStringAsFixed(0),
-                                    decoration:  InputDecoration(
-                                      labelText:Strings.of(context).amount_title,
-                                      suffixText: Strings.of(context).currency_symbol,
+                                        .toStringAsFixed(0)
+                                        .threeDigit,
+                                    decoration: InputDecoration(
+                                      labelText:
+                                          Strings.of(context).amount_title,
+                                      suffixText:
+                                          Strings.of(context).currency_symbol,
                                     ),
                                     keyboardType: TextInputType.number,
                                     onChanged: (t) {
@@ -104,18 +107,20 @@ class _ExpenseDetailPageState extends State<ExpenseDetailPage> {
                                       children: [
                                         Expanded(
                                           child: DropdownSearch<PersonEntity>(
-                                            popupProps:  PopupProps.dialog(
+                                            popupProps: PopupProps.dialog(
                                               searchFieldProps: TextFieldProps(
                                                   decoration: InputDecoration(
-                                                      hintText:
-                                                          Strings.of(context).search_people_hint_text)),
+                                                      hintText: Strings.of(
+                                                              context)
+                                                          .search_people_hint_text)),
                                               showSearchBox: true,
                                             ),
                                             dropdownDecoratorProps:
-                                                 DropDownDecoratorProps(
+                                                DropDownDecoratorProps(
                                               dropdownSearchDecoration:
                                                   InputDecoration(
-                                                labelText: Strings.of(context).person_title,
+                                                labelText: Strings.of(context)
+                                                    .person_title,
                                               ),
                                             ),
                                             selectedItem: PersonEntity(
@@ -165,20 +170,27 @@ class _ExpenseDetailPageState extends State<ExpenseDetailPage> {
                             const SizedBox(
                               height: 8,
                             ),
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(Strings.of(context).has_paid_title),
-                                  Checkbox(
-                                      value: state.isPaid ??
-                                          widget.expenseEntity.isPaid == 1,
-                                      onChanged: (v) {
-                                        context
-                                            .read<ExpenseInputCubit>()
-                                            .update(isPaid: v);
-                                      }),
-                                ]),
+                            InkWell(
+                              onTap: () {
+                                context
+                                    .read<ExpenseInputCubit>()
+                                    .update(isPaid: !(state.isPaid ?? false));
+                              },
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(Strings.of(context).has_paid_title),
+                                    Checkbox(
+                                        value: state.isPaid ??
+                                            widget.expenseEntity.isPaid == 1,
+                                        onChanged: (v) {
+                                          context
+                                              .read<ExpenseInputCubit>()
+                                              .update(isPaid: v);
+                                        }),
+                                  ]),
+                            ),
                             const SizedBox(
                               height: 8,
                             ),
@@ -193,7 +205,7 @@ class _ExpenseDetailPageState extends State<ExpenseDetailPage> {
                               onPressed: () {
                                 _editExpenseHandler();
                               },
-                              child:  Padding(
+                              child: Padding(
                                 padding: const EdgeInsets.all(16.0),
                                 child: Text(Strings.of(context).submit_title),
                               ),

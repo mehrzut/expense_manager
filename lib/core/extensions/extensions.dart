@@ -65,3 +65,22 @@ extension ScaffoldMessengerStateExtension on ScaffoldMessengerState {
         )));
   }
 }
+
+
+extension StringExtensions on String {
+  
+
+  String get threeDigit {
+    String t = this;
+    for (int i = 1; i * 4 <= t.length; i++) {
+      t = t.insert(length - (i * 3), ',');
+    }
+    return t;
+  }
+
+  
+  String insert(int index, String text) {
+    return substring(0, index) + text + substring(index);
+  }
+
+}

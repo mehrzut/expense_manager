@@ -19,6 +19,7 @@ class ExpenseTypeWidget extends StatelessWidget {
           ),
           text: Strings.of(context).debt_title,
           isSelected: selectedType == ExpenseType.debt,
+          color: Colors.red,
           onTap: () {
             onChanged(ExpenseType.debt);
           },
@@ -32,6 +33,7 @@ class ExpenseTypeWidget extends StatelessWidget {
           ),
           text: Strings.of(context).credit_title,
           isSelected: selectedType == ExpenseType.credit,
+          color: Colors.green,
           onTap: () {
             onChanged(ExpenseType.credit);
           },
@@ -47,10 +49,12 @@ class _TypeButton extends StatelessWidget {
     required this.isSelected,
     required this.text,
     required this.onTap,
+    required this.color,
   });
   final BorderRadius borderRadius;
   final bool isSelected;
   final String text;
+  final Color color;
   final Function() onTap;
 
   @override
@@ -62,9 +66,7 @@ class _TypeButton extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-              color: isSelected
-                  ? Colors.lightBlue.withOpacity(0.7)
-                  : Colors.white10,
+              color: isSelected ? color.withOpacity(0.7) : Colors.white10,
               borderRadius: borderRadius),
           child: Center(
             child: Text(text),

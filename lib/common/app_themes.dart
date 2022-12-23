@@ -17,6 +17,11 @@ class AppThemes {
           surface: Color.fromARGB(255, 46, 46, 46),
           onSurface: Colors.white),
       brightness: Brightness.dark,
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+            shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(32)))),
+      ),
       appBarTheme: const AppBarTheme(
         elevation: 0.0,
         centerTitle: true,
