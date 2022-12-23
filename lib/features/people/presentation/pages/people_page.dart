@@ -1,6 +1,5 @@
 import 'package:expense_manager/common/app_routes.dart';
 import 'package:expense_manager/core/extensions/extensions.dart';
-import 'package:expense_manager/features/people/domain/entities/person_entity.dart';
 import 'package:expense_manager/features/people/presentation/bloc/people_bloc.dart';
 import 'package:expense_manager/features/people/presentation/pages/person_item.dart';
 import 'package:flutter/material.dart';

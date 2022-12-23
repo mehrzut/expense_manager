@@ -44,8 +44,8 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
       ),
       body: TabBarView(
         controller: tabController,
-        children: [
-          const PeoplePage(),
+        children: const [
+          PeoplePage(),
           ExpensesPage(),
         ],
       ),

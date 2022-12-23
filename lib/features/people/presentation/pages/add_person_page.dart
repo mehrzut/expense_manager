@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:expense_manager/common/app_routes.dart';
 import 'package:expense_manager/core/extensions/extensions.dart';
