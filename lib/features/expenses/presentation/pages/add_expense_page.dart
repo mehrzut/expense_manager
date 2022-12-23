@@ -7,6 +7,7 @@ import 'package:expense_manager/features/expenses/presentation/cubit/expense_inp
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../common/app_strings.dart';
 import '../../../people/domain/entities/person_entity.dart';
 import '../../../people/presentation/bloc/people_bloc.dart';
 import '../widgets/expense_type_widget.dart';
@@ -32,7 +33,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Expense'),
+        title:  Text(Strings.of(context).add_expense_title),
       ),
       body: BlocListener<CreateExpenseBloc, CreateExpenseState>(
         listener: (context, state) {
@@ -55,7 +56,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                           children: [
                             TextField(
                               decoration:
-                                  const InputDecoration(labelText: 'Title'),
+                                   InputDecoration(labelText: Strings.of(context).title_title),
                               onChanged: (t) {
                                 context
                                     .read<ExpenseInputCubit>()
@@ -69,9 +70,9 @@ class _AddExpensePageState extends State<AddExpensePage> {
                               children: [
                                 Expanded(
                                   child: TextField(
-                                    decoration: const InputDecoration(
-                                      labelText: 'Amount',
-                                      suffixText: 'T',
+                                    decoration:  InputDecoration(
+                                      labelText: Strings.of(context).amount_title,
+                                      suffixText: Strings.of(context).currency_symbol,
                                     ),
                                     keyboardType: TextInputType.number,
                                     onChanged: (t) {
@@ -101,18 +102,18 @@ class _AddExpensePageState extends State<AddExpensePage> {
                                       children: [
                                         Expanded(
                                           child: DropdownSearch<PersonEntity>(
-                                            popupProps: const PopupProps.dialog(
+                                            popupProps:  PopupProps.dialog(
                                               searchFieldProps: TextFieldProps(
                                                   decoration: InputDecoration(
                                                       hintText:
-                                                          'Search people...')),
+                                                          Strings.of(context).search_people_hint_text)),
                                               showSearchBox: true,
                                             ),
                                             dropdownDecoratorProps:
-                                                const DropDownDecoratorProps(
+                                                 DropDownDecoratorProps(
                                               dropdownSearchDecoration:
                                                   InputDecoration(
-                                                labelText: "Person",
+                                                labelText: Strings.of(context).person_title,
                                               ),
                                             ),
                                             selectedItem: widget.personEntity,
@@ -167,9 +168,9 @@ class _AddExpensePageState extends State<AddExpensePage> {
                               onPressed: () {
                                 _createExpenseHandler();
                               },
-                              child: const Padding(
-                                padding: EdgeInsets.all(16.0),
-                                child: Text('Submit'),
+                              child:  Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(Strings.of(context).submit_title),
                               ),
                             ),
                           ),
@@ -192,13 +193,14 @@ class _AddExpensePageState extends State<AddExpensePage> {
           CreateExpenseEvent.create(context.read<ExpenseInputCubit>().expense));
     } else {
       ScaffoldMessenger.of(context).showErrorSnack(
-        'Please fill empty fields.',
+        Strings.of(context).empty_field_error_message,
       );
     }
   }
 
   void _onCreatedExpense() {
     context.read<ExpenseBloc>().add(const ExpenseEvent.getAll());
+    context.read<PeopleBloc>().add(const PeopleEvent.getAll());
     if (mounted) {
       Navigator.pop(context);
     }
@@ -206,7 +208,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
   void _onFailedCreatingExpense() {
     ScaffoldMessenger.of(context).showErrorSnack(
-      "Couldn't create expense! try again.",
+      Strings.of(context).create_expense_error_message,
       retry: () {
         _createExpenseHandler();
       },

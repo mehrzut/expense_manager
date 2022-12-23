@@ -1,4 +1,5 @@
 import 'package:expense_manager/common/app_routes.dart';
+import 'package:expense_manager/common/app_strings.dart';
 import 'package:expense_manager/core/enums/enums.dart';
 import 'package:expense_manager/core/extensions/extensions.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +23,12 @@ class _ExpensesPage extends State<ExpensesPage> {
           Navigator.pushNamed(context, AppRoutes.addExpense);
         },
         label: Row(
-          children: const [
-            Text('Add'),
-            SizedBox(
+          children:  [
+            Text(Strings.of(context).add_title),
+            const SizedBox(
               width: 5,
             ),
-            Icon(Icons.attach_money_rounded),
+            const Icon(Icons.attach_money_rounded),
           ],
         ),
       ),
@@ -57,7 +58,7 @@ class _ExpensesPage extends State<ExpensesPage> {
                           title: Text(
                               '${expenses[index].description} - ${expenses[index].personName ?? ''}'),
                           trailing: Text(
-                            '${expenses[index].price.toStringAsFixed(0)} T',
+                            '${expenses[index].price.toStringAsFixed(0)} ${Strings.of(context).currency_symbol}',
                             style: TextStyle(
                               color: expenses[index].expenseType ==
                                       ExpenseType.credit
@@ -69,16 +70,16 @@ class _ExpensesPage extends State<ExpensesPage> {
                       ),
                     ),
                   )
-                : const Center(
-                    child: Text('List is empty!'),
+                : Center(
+                    child: Text(Strings.of(context).empty_list_message),
                   ),
             failed: (message) => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Center(child: Text("Could't get data! try again.")),
+                 Center(child: Text(Strings.of(context).get_data_error_message)),
                 TextButton(
                   onPressed: () => getData(),
-                  child: const Text('Retry'),
+                  child: Text(Strings.of(context).retry_title),
                 )
               ],
             ),
@@ -91,7 +92,7 @@ class _ExpensesPage extends State<ExpensesPage> {
 
   void _failedGetExpensesHandler(BuildContext context) {
     ScaffoldMessenger.of(context).showErrorSnack(
-      "Could't get data! try again.",
+      Strings.of(context).get_data_error_message,
       retry: () {
         getData();
       },

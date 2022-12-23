@@ -32,12 +32,12 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
         title: Text(Strings.of(context).app_name),
         bottom: TabBar(
           controller: tabController,
-          tabs: const [
+          tabs:  [
             Tab(
-              text: 'People',
+              text: Strings.of(context).people_title,
             ),
             Tab(
-              text: 'Expenses',
+              text: Strings.of(context).expenses_title,
             ),
           ],
         ),

@@ -1,3 +1,4 @@
+import 'package:expense_manager/common/app_strings.dart';
 import 'package:expense_manager/core/extensions/extensions.dart';
 import 'package:expense_manager/features/expenses/presentation/bloc/person_expense_bloc.dart';
 import 'package:expense_manager/features/people/domain/entities/person_entity.dart';
@@ -30,15 +31,16 @@ class _PersonExpensePageState extends State<PersonExpensePage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.pushNamed(context, AppRoutes.addExpense,arguments: widget.personEntity);
+          Navigator.pushNamed(context, AppRoutes.addExpense,
+              arguments: widget.personEntity);
         },
         label: Row(
-          children: const [
-            Text('Add'),
-            SizedBox(
+          children: [
+            Text(Strings.of(context).add_title),
+            const SizedBox(
               width: 5,
             ),
-            Icon(Icons.attach_money_rounded),
+            const Icon(Icons.attach_money_rounded),
           ],
         ),
       ),
@@ -68,7 +70,7 @@ class _PersonExpensePageState extends State<PersonExpensePage> {
                           title: Text(
                               '${expenses[index].description} - ${expenses[index].personName ?? ''}'),
                           trailing: Text(
-                            '${expenses[index].price.toStringAsFixed(0)} T',
+                            '${expenses[index].price.toStringAsFixed(0)} ${Strings.of(context).currency_symbol}',
                             style: TextStyle(
                               color: expenses[index].expenseType ==
                                       ExpenseType.credit
@@ -80,16 +82,16 @@ class _PersonExpensePageState extends State<PersonExpensePage> {
                       ),
                     ),
                   )
-                : const Center(
-                    child: Text('List is empty!'),
+                : Center(
+                    child: Text(Strings.of(context).empty_list_message),
                   ),
             failed: (message) => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Center(child: Text("Could't get data! try again.")),
+                Center(child: Text(Strings.of(context).get_data_error_message)),
                 TextButton(
                   onPressed: () => getData(),
-                  child: const Text('Retry'),
+                  child: Text(Strings.of(context).retry_title),
                 )
               ],
             ),
@@ -102,7 +104,7 @@ class _PersonExpensePageState extends State<PersonExpensePage> {
 
   void _failedGetPersonExpensesHandler(BuildContext context) {
     ScaffoldMessenger.of(context).showErrorSnack(
-      "Could't get data! try again.",
+      Strings.of(context).get_data_error_message,
       retry: () {
         getData();
       },

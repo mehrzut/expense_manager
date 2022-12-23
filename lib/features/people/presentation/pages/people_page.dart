@@ -5,6 +5,7 @@ import 'package:expense_manager/features/people/presentation/bloc/people_bloc.da
 import 'package:expense_manager/features/people/presentation/pages/person_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../common/app_strings.dart';
 import '../bloc/create_person_bloc.dart';
 
 class PeoplePage extends StatelessWidget {
@@ -18,12 +19,12 @@ class PeoplePage extends StatelessWidget {
           Navigator.pushNamed(context, AppRoutes.addPerson);
         },
         label: Row(
-          children: const [
-            Text('Add'),
-            SizedBox(
+          children:  [
+            Text(Strings.of(context).add_title),
+            const SizedBox(
               width: 5,
             ),
-            Icon(Icons.person_add_outlined),
+            const Icon(Icons.person_add_outlined),
           ],
         ),
       ),
@@ -50,16 +51,16 @@ class PeoplePage extends StatelessWidget {
                       itemBuilder: (context, index) =>
                           PersonItem(person: people[index]),
                     )
-                  : const Center(
-                      child: Text('List is empty!'),
+                  :  Center(
+                      child: Text(Strings.of(context).empty_list_message),
                     ),
               failed: (message) => Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Center(child: Text("Could't get data! try again.")),
+                   Center(child: Text(Strings.of(context).get_data_error_message)),
                   TextButton(
                     onPressed: () => getData(context),
-                    child: const Text('Retry'),
+                    child: Text(Strings.of(context).retry_title),
                   )
                 ],
               ),
@@ -73,7 +74,7 @@ class PeoplePage extends StatelessWidget {
 
   void _failedGetAllPeopleHandler(BuildContext context) {
     ScaffoldMessenger.of(context).showErrorSnack(
-      "Could't get data! try again.",
+      Strings.of(context).get_data_error_message,
       retry: () {
         getData(context);
       },

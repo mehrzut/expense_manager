@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../common/app_routes.dart';
+import '../../../../common/app_strings.dart';
 import '../../../people/domain/entities/person_entity.dart';
 import '../../../people/presentation/bloc/people_bloc.dart';
 import '../bloc/edit_expense_bloc.dart';
@@ -31,7 +32,7 @@ class _ExpenseDetailPageState extends State<ExpenseDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Expense Detail'),
+        title: Text(Strings.of(context).expense_detail_title),
       ),
       body: BlocListener<EditExpenseBloc, EditExpenseState>(
         listener: (context, state) {
@@ -54,8 +55,8 @@ class _ExpenseDetailPageState extends State<ExpenseDetailPage> {
                           children: [
                             TextFormField(
                               initialValue: widget.expenseEntity.description,
-                              decoration:
-                                  const InputDecoration(labelText: 'Title'),
+                              decoration: InputDecoration(
+                                  labelText: Strings.of(context).title_title),
                               onChanged: (t) {
                                 context
                                     .read<ExpenseInputCubit>()
@@ -70,12 +71,10 @@ class _ExpenseDetailPageState extends State<ExpenseDetailPage> {
                                 Expanded(
                                   child: TextFormField(
                                     initialValue: widget.expenseEntity.price
-                                        .toString()
-                                        .split('.')
-                                        .first,
-                                    decoration: const InputDecoration(
-                                      labelText: 'Amount',
-                                      suffixText: 'T',
+                                        .toStringAsFixed(0),
+                                    decoration:  InputDecoration(
+                                      labelText:Strings.of(context).amount_title,
+                                      suffixText: Strings.of(context).currency_symbol,
                                     ),
                                     keyboardType: TextInputType.number,
                                     onChanged: (t) {
@@ -105,18 +104,18 @@ class _ExpenseDetailPageState extends State<ExpenseDetailPage> {
                                       children: [
                                         Expanded(
                                           child: DropdownSearch<PersonEntity>(
-                                            popupProps: const PopupProps.dialog(
+                                            popupProps:  PopupProps.dialog(
                                               searchFieldProps: TextFieldProps(
                                                   decoration: InputDecoration(
                                                       hintText:
-                                                          'Search people...')),
+                                                          Strings.of(context).search_people_hint_text)),
                                               showSearchBox: true,
                                             ),
                                             dropdownDecoratorProps:
-                                                const DropDownDecoratorProps(
+                                                 DropDownDecoratorProps(
                                               dropdownSearchDecoration:
                                                   InputDecoration(
-                                                labelText: "Person",
+                                                labelText: Strings.of(context).person_title,
                                               ),
                                             ),
                                             selectedItem: PersonEntity(
@@ -170,7 +169,7 @@ class _ExpenseDetailPageState extends State<ExpenseDetailPage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Text('Has paid?'),
+                                  Text(Strings.of(context).has_paid_title),
                                   Checkbox(
                                       value: state.isPaid ??
                                           widget.expenseEntity.isPaid == 1,
@@ -194,9 +193,9 @@ class _ExpenseDetailPageState extends State<ExpenseDetailPage> {
                               onPressed: () {
                                 _editExpenseHandler();
                               },
-                              child: const Padding(
-                                padding: EdgeInsets.all(16.0),
-                                child: Text('Submit'),
+                              child:  Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(Strings.of(context).submit_title),
                               ),
                             ),
                           ),
@@ -221,7 +220,7 @@ class _ExpenseDetailPageState extends State<ExpenseDetailPage> {
           .copyWith(id: widget.expenseEntity.id)));
     } else {
       ScaffoldMessenger.of(context).showErrorSnack(
-        'Please fill empty fields.',
+        Strings.of(context).empty_field_error_message,
       );
     }
   }
@@ -236,7 +235,7 @@ class _ExpenseDetailPageState extends State<ExpenseDetailPage> {
 
   void _onFailedEditingExpense() {
     ScaffoldMessenger.of(context).showErrorSnack(
-      "Couldn't update expense! try again.",
+      Strings.of(context).update_expense_error_message,
       retry: () {
         _editExpenseHandler();
       },

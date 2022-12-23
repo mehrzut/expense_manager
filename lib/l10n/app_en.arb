@@ -1,3 +1,26 @@
 {
-    "app_name":"Expense Manager"
+    "app_name":"Expense Manager",
+    "amount_title":"Amount",
+    "currency_symbol":"T",
+    "search_people_hint_text":"Search people...",
+    "person_title":"Person",
+    "add_expense_title":"Add Expense",
+    "title_title":"Title",
+    "submit_title":"Submit",
+    "empty_field_error_message":"Please fill empty fields.",
+    "create_expense_error_message":"Couldn't create expense! try again.",
+    "expense_detail_title":"Expense Detail",
+    "has_paid_title":"Has paid?",
+    "update_expense_error_message":"Couldn't update expense! try again.",
+    "get_data_error_message":"Could't get data! try again.",
+    "retry_title":"Retry",
+    "empty_list_message":"List is empty!",
+    "add_title":"Add",
+    "credit_title":"Credit",
+    "debt_title":"Debt",
+    "expenses_title":"Expenses",
+    "people_title":"People",
+    "create_person_error_message":"Couldn't create person! try again.",
+    "name_title":"Name",
+    "add_person_title":"Add Person"
 }

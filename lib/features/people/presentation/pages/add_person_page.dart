@@ -5,6 +5,7 @@ import 'package:expense_manager/core/extensions/extensions.dart';
 import 'package:expense_manager/features/people/domain/entities/person_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../common/app_strings.dart';
 import '../bloc/create_person_bloc.dart';
 import '../bloc/people_bloc.dart';
 
@@ -16,7 +17,7 @@ class AddPersonPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Person'),
+        title:  Text(Strings.of(context).add_person_title),
       ),
       body: BlocListener<CreatePersonBloc, CreatePersonState>(
         listener: (context, state) {
@@ -35,7 +36,7 @@ class AddPersonPage extends StatelessWidget {
                 child: Column(children: [
                   TextField(
                     controller: nameController,
-                    decoration: const InputDecoration(labelText: 'Name'),
+                    decoration:  InputDecoration(labelText: Strings.of(context).name_title),
                   ),
                 ]),
               ),
@@ -46,9 +47,9 @@ class AddPersonPage extends StatelessWidget {
                       onPressed: () {
                         _createPersonHandler(context);
                       },
-                      child: const Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Text('Submit'),
+                      child:  Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(Strings.of(context).submit_title),
                       ),
                     ),
                   ),
@@ -70,7 +71,7 @@ class AddPersonPage extends StatelessWidget {
 
   void _failedPersonCreationHandler(BuildContext context) {
     ScaffoldMessenger.of(context).showErrorSnack(
-      "Couldn't create person! try again.",
+      Strings.of(context).create_person_error_message,
       retry: () {
         _createPersonHandler(context);
       },
@@ -86,7 +87,7 @@ class AddPersonPage extends StatelessWidget {
           );
     } else {
       ScaffoldMessenger.of(context).showErrorSnack(
-        'Please fill empty fields.',
+        Strings.of(context).empty_field_error_message,
       );
     }
   }

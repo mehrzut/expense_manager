@@ -1,6 +1,8 @@
 import 'package:expense_manager/core/enums/enums.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../common/app_strings.dart';
+
 class ExpenseTypeWidget extends StatelessWidget {
   const ExpenseTypeWidget(
       {super.key, required this.onChanged, required this.selectedType});
@@ -15,7 +17,7 @@ class ExpenseTypeWidget extends StatelessWidget {
           borderRadius: const BorderRadius.horizontal(
             left: Radius.circular(12),
           ),
-          text: 'Debt',
+          text: Strings.of(context).debt_title,
           isSelected: selectedType == ExpenseType.debt,
           onTap: () {
             onChanged(ExpenseType.debt);
@@ -28,7 +30,7 @@ class ExpenseTypeWidget extends StatelessWidget {
           borderRadius: const BorderRadius.horizontal(
             right: Radius.circular(12),
           ),
-          text: 'Credit',
+          text: Strings.of(context).credit_title,
           isSelected: selectedType == ExpenseType.credit,
           onTap: () {
             onChanged(ExpenseType.credit);

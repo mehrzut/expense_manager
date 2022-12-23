@@ -1,6 +1,7 @@
 import 'package:expense_manager/common/app_routes.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../common/app_strings.dart';
 import '../../domain/entities/person_entity.dart';
 
 class PersonItem extends StatelessWidget {
@@ -20,7 +21,7 @@ class PersonItem extends StatelessWidget {
         },
         title: Text(person.displayName),
         trailing: Text(
-          '${(person.totalAmount ?? 0).abs().toStringAsFixed(0)} T',
+          '${(person.totalAmount ?? 0).abs().toStringAsFixed(0)} ${Strings.of(context).currency_symbol}',
           style: TextStyle(
             color: (person.totalAmount ?? 0).sign == -1
                 ? Colors.red
