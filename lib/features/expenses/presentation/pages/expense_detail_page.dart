@@ -71,8 +71,7 @@ class _ExpenseDetailPageState extends State<ExpenseDetailPage> {
                                 Expanded(
                                   child: TextFormField(
                                     initialValue: widget.expenseEntity.price
-                                        .toStringAsFixed(0)
-                                        .threeDigit,
+                                        .toStringAsFixed(0),
                                     decoration: InputDecoration(
                                       labelText:
                                           Strings.of(context).amount_title,
