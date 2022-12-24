@@ -66,10 +66,7 @@ extension ScaffoldMessengerStateExtension on ScaffoldMessengerState {
   }
 }
 
-
 extension StringExtensions on String {
-  
-
   String get threeDigit {
     String t = this;
     for (int i = 1; i * 4 <= t.length; i++) {
@@ -78,9 +75,15 @@ extension StringExtensions on String {
     return t;
   }
 
-  
   String insert(int index, String text) {
     return substring(0, index) + text + substring(index);
   }
+}
 
+extension DateTimeExt on DateTime? {
+  String get getFullDateString {
+    if (this == null) return '';
+    final d = this!;
+    return '${d.year}/${d.month}/${d.day}';
+  }
 }

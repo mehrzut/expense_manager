@@ -22,5 +22,6 @@
     "people_title":"People",
     "create_person_error_message":"Couldn't create person! try again.",
     "name_title":"Name",
-    "add_person_title":"Add Person"
+    "add_person_title":"Add Person",
+    "date_title":"Date"
 }

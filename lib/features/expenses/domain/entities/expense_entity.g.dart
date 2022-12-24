@@ -15,6 +15,8 @@ _$_ExpenseEntity _$$_ExpenseEntityFromJson(Map<String, dynamic> json) =>
       personId: json['personId'] as int?,
       expenseType: $enumDecode(_$ExpenseTypeEnumMap, json['expenseType']),
       isPaid: json['isPaid'] as int? ?? 0,
+      date:
+          json['date'] == null ? null : DateTime.parse(json['date'] as String),
     );
 
 Map<String, dynamic> _$$_ExpenseEntityToJson(_$_ExpenseEntity instance) =>
@@ -26,6 +28,7 @@ Map<String, dynamic> _$$_ExpenseEntityToJson(_$_ExpenseEntity instance) =>
       'personId': instance.personId,
       'expenseType': _$ExpenseTypeEnumMap[instance.expenseType]!,
       'isPaid': instance.isPaid,
+      'date': instance.date?.toIso8601String(),
     };
 
 const _$ExpenseTypeEnumMap = {

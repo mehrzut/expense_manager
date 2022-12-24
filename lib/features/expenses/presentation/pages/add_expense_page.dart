@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../common/app_strings.dart';
 import '../../../people/domain/entities/person_entity.dart';
 import '../../../people/presentation/bloc/people_bloc.dart';
+import '../widgets/date_picker.dart';
 import '../widgets/expense_type_widget.dart';
 
 class AddExpensePage extends StatefulWidget {
@@ -33,7 +34,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text(Strings.of(context).add_expense_title),
+        title: Text(Strings.of(context).add_expense_title),
       ),
       body: BlocListener<CreateExpenseBloc, CreateExpenseState>(
         listener: (context, state) {
@@ -55,8 +56,8 @@ class _AddExpensePageState extends State<AddExpensePage> {
                           padding: const EdgeInsets.all(24.0),
                           children: [
                             TextField(
-                              decoration:
-                                   InputDecoration(labelText: Strings.of(context).title_title),
+                              decoration: InputDecoration(
+                                  labelText: Strings.of(context).title_title),
                               onChanged: (t) {
                                 context
                                     .read<ExpenseInputCubit>()
@@ -70,9 +71,11 @@ class _AddExpensePageState extends State<AddExpensePage> {
                               children: [
                                 Expanded(
                                   child: TextField(
-                                    decoration:  InputDecoration(
-                                      labelText: Strings.of(context).amount_title,
-                                      suffixText: Strings.of(context).currency_symbol,
+                                    decoration: InputDecoration(
+                                      labelText:
+                                          Strings.of(context).amount_title,
+                                      suffixText:
+                                          Strings.of(context).currency_symbol,
                                     ),
                                     keyboardType: TextInputType.number,
                                     onChanged: (t) {
@@ -102,18 +105,20 @@ class _AddExpensePageState extends State<AddExpensePage> {
                                       children: [
                                         Expanded(
                                           child: DropdownSearch<PersonEntity>(
-                                            popupProps:  PopupProps.dialog(
+                                            popupProps: PopupProps.dialog(
                                               searchFieldProps: TextFieldProps(
                                                   decoration: InputDecoration(
-                                                      hintText:
-                                                          Strings.of(context).search_people_hint_text)),
+                                                      hintText: Strings.of(
+                                                              context)
+                                                          .search_people_hint_text)),
                                               showSearchBox: true,
                                             ),
                                             dropdownDecoratorProps:
-                                                 DropDownDecoratorProps(
+                                                DropDownDecoratorProps(
                                               dropdownSearchDecoration:
                                                   InputDecoration(
-                                                labelText: Strings.of(context).person_title,
+                                                labelText: Strings.of(context)
+                                                    .person_title,
                                               ),
                                             ),
                                             selectedItem: widget.personEntity,
@@ -157,6 +162,18 @@ class _AddExpensePageState extends State<AddExpensePage> {
                             const SizedBox(
                               height: 8,
                             ),
+                            DatePicker(
+                              onChange: (DateTime? date) {
+                                context
+                                    .read<ExpenseInputCubit>()
+                                    .update(date: date);
+                              },
+                              title: state.date?.getFullDateString ??
+                                  Strings.of(context).date_title,
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
                           ]),
                     ),
                     Padding(
@@ -168,7 +185,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                               onPressed: () {
                                 _createExpenseHandler();
                               },
-                              child:  Padding(
+                              child: Padding(
                                 padding: const EdgeInsets.all(16.0),
                                 child: Text(Strings.of(context).submit_title),
                               ),

@@ -11,6 +11,7 @@ import '../../../people/presentation/bloc/people_bloc.dart';
 import '../bloc/edit_expense_bloc.dart';
 import '../bloc/expense_bloc.dart';
 import '../cubit/expense_input_cubit.dart';
+import '../widgets/date_picker.dart';
 import '../widgets/expense_type_widget.dart';
 
 class ExpenseDetailPage extends StatefulWidget {
@@ -193,6 +194,19 @@ class _ExpenseDetailPageState extends State<ExpenseDetailPage> {
                             const SizedBox(
                               height: 8,
                             ),
+                            DatePicker(
+                              onChange: (DateTime? date) {
+                                context
+                                    .read<ExpenseInputCubit>()
+                                    .update(date: date);
+                              },
+                              init:state.date,
+                              title: state.date?.getFullDateString ??
+                                  Strings.of(context).date_title,
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
                           ]),
                     ),
                     Padding(
@@ -260,6 +274,7 @@ class _ExpenseDetailPageState extends State<ExpenseDetailPage> {
           personId: widget.expenseEntity.personId,
           personName: widget.expenseEntity.personName,
           title: widget.expenseEntity.description,
+          date: widget.expenseEntity.date
         );
   }
 }

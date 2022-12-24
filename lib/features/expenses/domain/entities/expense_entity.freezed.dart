@@ -28,6 +28,7 @@ mixin _$ExpenseEntity {
   int? get personId => throw _privateConstructorUsedError;
   ExpenseType get expenseType => throw _privateConstructorUsedError;
   int get isPaid => throw _privateConstructorUsedError;
+  DateTime? get date => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,7 +49,8 @@ abstract class $ExpenseEntityCopyWith<$Res> {
       String? personName,
       int? personId,
       ExpenseType expenseType,
-      int isPaid});
+      int isPaid,
+      DateTime? date});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$ExpenseEntityCopyWithImpl<$Res, $Val extends ExpenseEntity>
     Object? personId = freezed,
     Object? expenseType = null,
     Object? isPaid = null,
+    Object? date = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -101,6 +104,10 @@ class _$ExpenseEntityCopyWithImpl<$Res, $Val extends ExpenseEntity>
           ? _value.isPaid
           : isPaid // ignore: cast_nullable_to_non_nullable
               as int,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -120,7 +127,8 @@ abstract class _$$_ExpenseEntityCopyWith<$Res>
       String? personName,
       int? personId,
       ExpenseType expenseType,
-      int isPaid});
+      int isPaid,
+      DateTime? date});
 }
 
 /// @nodoc
@@ -141,6 +149,7 @@ class __$$_ExpenseEntityCopyWithImpl<$Res>
     Object? personId = freezed,
     Object? expenseType = null,
     Object? isPaid = null,
+    Object? date = freezed,
   }) {
     return _then(_$_ExpenseEntity(
       id: freezed == id
@@ -171,6 +180,10 @@ class __$$_ExpenseEntityCopyWithImpl<$Res>
           ? _value.isPaid
           : isPaid // ignore: cast_nullable_to_non_nullable
               as int,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -185,7 +198,8 @@ class _$_ExpenseEntity extends _ExpenseEntity {
       this.personName,
       this.personId,
       required this.expenseType,
-      this.isPaid = 0})
+      this.isPaid = 0,
+      this.date})
       : super._();
 
   factory _$_ExpenseEntity.fromJson(Map<String, dynamic> json) =>
@@ -207,10 +221,12 @@ class _$_ExpenseEntity extends _ExpenseEntity {
   @override
   @JsonKey()
   final int isPaid;
+  @override
+  final DateTime? date;
 
   @override
   String toString() {
-    return 'ExpenseEntity(id: $id, description: $description, price: $price, personName: $personName, personId: $personId, expenseType: $expenseType, isPaid: $isPaid)';
+    return 'ExpenseEntity(id: $id, description: $description, price: $price, personName: $personName, personId: $personId, expenseType: $expenseType, isPaid: $isPaid, date: $date)';
   }
 
   @override
@@ -228,13 +244,14 @@ class _$_ExpenseEntity extends _ExpenseEntity {
                 other.personId == personId) &&
             (identical(other.expenseType, expenseType) ||
                 other.expenseType == expenseType) &&
-            (identical(other.isPaid, isPaid) || other.isPaid == isPaid));
+            (identical(other.isPaid, isPaid) || other.isPaid == isPaid) &&
+            (identical(other.date, date) || other.date == date));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, description, price,
-      personName, personId, expenseType, isPaid);
+      personName, personId, expenseType, isPaid, date);
 
   @JsonKey(ignore: true)
   @override
@@ -258,7 +275,8 @@ abstract class _ExpenseEntity extends ExpenseEntity {
       final String? personName,
       final int? personId,
       required final ExpenseType expenseType,
-      final int isPaid}) = _$_ExpenseEntity;
+      final int isPaid,
+      final DateTime? date}) = _$_ExpenseEntity;
   _ExpenseEntity._() : super._();
 
   factory _ExpenseEntity.fromJson(Map<String, dynamic> json) =
@@ -279,6 +297,8 @@ abstract class _ExpenseEntity extends ExpenseEntity {
   ExpenseType get expenseType;
   @override
   int get isPaid;
+  @override
+  DateTime? get date;
   @override
   @JsonKey(ignore: true)
   _$$_ExpenseEntityCopyWith<_$_ExpenseEntity> get copyWith =>

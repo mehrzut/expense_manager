@@ -10,5 +10,6 @@ class ExpenseInputState with _$ExpenseInputState {
     required int? personId,
     required ExpenseType? expenseType,
     required bool? isPaid,
+    required DateTime? date
   }) = _ExpenseInputState;
 }

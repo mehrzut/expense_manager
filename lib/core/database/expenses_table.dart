@@ -12,11 +12,12 @@ class ExpensesTable implements DataBaseTable<ExpenseEntity> {
   static const columnPersonId = 'personId';
   static const columnExpenseType = 'expenseType';
   static const columnIsPaid = 'isPaid';
+  static const columnDate = 'date';
 
   @override
   Future<void> create(Database db) async {
     return await db.execute(
-        'CREATE TABLE $tableName ($columnId INTEGER PRIMARY KEY AUTOINCREMENT, $columnDescription TEXT, $columnPrice REAL, $columnPersonName TEXT, $columnExpenseType TEXT, $columnPersonId INTEGER, $columnIsPaid INTEGER)');
+        'CREATE TABLE $tableName ($columnId INTEGER PRIMARY KEY AUTOINCREMENT, $columnDescription TEXT, $columnPrice REAL, $columnPersonName TEXT, $columnExpenseType TEXT, $columnPersonId INTEGER, $columnIsPaid INTEGER, $columnDate TEXT)');
   }
 
   @override

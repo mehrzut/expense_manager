@@ -27,13 +27,22 @@ class DataBaseHelper {
   @factoryMethod
   static Future<DataBaseHelper> init() async {
     final path = await getDatabasesPath();
-    _db = await openDatabase('$path/$_dbName', version: 1,
-        onCreate: (Database db, int version) async {
-      // When creating the db, create the tables
-       for (DataBaseTable table in _tables) {
-        await table.create(db);
-      }
-    });
+    _db = await openDatabase(
+      '$path/$_dbName',
+      version: 2,
+      onCreate: (Database db, int version) async {
+        // When creating the db, create the tables
+        for (DataBaseTable table in _tables) {
+          await table.create(db);
+        }
+      },
+      onUpgrade: (db, oldVersion, newVersion) {
+        if ( newVersion > oldVersion) {
+          db.execute(
+              "ALTER TABLE ${_expensesTable.tableName} ADD COLUMN ${ExpensesTable.columnDate} TEXT");
+        }
+      },
+    );
     return DataBaseHelper._();
   }
 
