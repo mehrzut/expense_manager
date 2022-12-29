@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        theme: AppThemes.dark,
+        theme: AppThemes.light,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: L10n.supportedLanguages,
         initialRoute: AppRoutes.initialRoute,

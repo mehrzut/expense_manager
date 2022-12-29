@@ -1,15 +1,33 @@
+import 'package:expense_manager/common/app_colors.dart';
+import 'package:flutter/material.dart';
 
 class AppTextStyle {
-	/*static TextStyle getAppTextStyle(
-		{double size = 14,
-		FontWeight weight = FontWeight.normal,
-		FontStyle style = FontStyle.normal,
-		Color color = Colors.black}) {
-	  return TextStyle(
-		  color: color,
-		  fontSize: size,
-		  fontWeight: weight,
-		  fontStyle: style,
-		  fontFamily: "Jost"
-	}*/
+  static const TextStyle cardTitleTextStyle = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.w400,
+    fontSize: 18,
+  );
+  static const TextStyle cardSubtitleTextStyle = TextStyle(
+    color: Colors.black54,
+    fontSize: 12,
+  );
+  static const TextStyle amountTextStyle = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+  );
+  static const TextStyle appBarTextStyle = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: AppColors.primary,
+  );
+
+  static const TextStyle textFieldLabelStyle = TextStyle(
+    fontSize: 12,
+    color: AppColors.primary,
+  );
+
+  static const TextStyle textStyle = TextStyle(
+    fontSize: 14,
+    color: AppColors.primary,
+  );
 }

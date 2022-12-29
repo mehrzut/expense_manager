@@ -1,11 +1,12 @@
 import 'package:expense_manager/common/app_routes.dart';
 import 'package:expense_manager/common/app_strings.dart';
-import 'package:expense_manager/core/enums/enums.dart';
 import 'package:expense_manager/core/extensions/extensions.dart';
+import 'package:expense_manager/features/expenses/domain/entities/expense_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/expense_bloc.dart';
+import '../widgets/expense_item.dart';
 
 class ExpensesPage extends StatefulWidget {
   const ExpensesPage({super.key});
@@ -23,7 +24,7 @@ class _ExpensesPage extends State<ExpensesPage> {
           Navigator.pushNamed(context, AppRoutes.addExpense);
         },
         label: Row(
-          children:  [
+          children: [
             Text(Strings.of(context).add_title),
             const SizedBox(
               width: 5,
@@ -45,29 +46,13 @@ class _ExpensesPage extends State<ExpensesPage> {
             ),
             loaded: (expenses) => expenses.isNotEmpty
                 ? ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    padding:
+                        const EdgeInsetsDirectional.only(top: 12, bottom: 72),
                     itemCount: expenses.length,
-                    itemBuilder: (context, index) => Opacity(
-                      opacity: expenses[index].isPaid == 1 ? 0.4 : 1,
-                      child: Card(
-                        child: ListTile(
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, AppRoutes.expenseDetail,
-                                arguments: expenses[index]);
-                          },
-                          title: Text(
-                              '${expenses[index].description} - ${expenses[index].personName ?? ''}'),
-                          trailing: Text(
-                            '${expenses[index].price.toStringAsFixed(0).threeDigit} ${Strings.of(context).currency_symbol}',
-                            style: TextStyle(
-                              color: expenses[index].expenseType ==
-                                      ExpenseType.credit
-                                  ? Colors.green
-                                  : Colors.red,
-                            ),
-                          ),
-                        ),
-                      ),
+                    itemBuilder: (context, index) => ExpenseItem(
+                      expense: expenses[index],
+                      onTap: _onExpenseItemClick,
                     ),
                   )
                 : Center(
@@ -76,7 +61,7 @@ class _ExpensesPage extends State<ExpensesPage> {
             failed: (message) => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                 Center(child: Text(Strings.of(context).get_data_error_message)),
+                Center(child: Text(Strings.of(context).get_data_error_message)),
                 TextButton(
                   onPressed: () => getData(),
                   child: Text(Strings.of(context).retry_title),
@@ -101,5 +86,9 @@ class _ExpensesPage extends State<ExpensesPage> {
 
   void getData() {
     context.read<ExpenseBloc>().add(const ExpenseEvent.getAll());
+  }
+
+  _onExpenseItemClick(ExpenseEntity expense) {
+    Navigator.pushNamed(context, AppRoutes.expenseDetail, arguments: expense);
   }
 }

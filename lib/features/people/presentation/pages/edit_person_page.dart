@@ -4,6 +4,7 @@ import 'package:expense_manager/features/people/domain/entities/person_entity.da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../common/app_strings.dart';
+import '../../../../core/presentation/custom_textfield.dart';
 import '../../../expenses/presentation/bloc/expense_bloc.dart';
 import '../bloc/edit_person_bloc.dart';
 import '../bloc/people_bloc.dart';
@@ -29,7 +30,7 @@ class _EditPersonPageState extends State<EditPersonPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(Strings.of(context).add_person_title),
+        title: Text(Strings.of(context).edit_person_title),
       ),
       body: BlocListener<EditPersonBloc, EditPersonState>(
         listener: (context, state) {
@@ -45,13 +46,16 @@ class _EditPersonPageState extends State<EditPersonPage> {
           child: Column(
             children: [
               Expanded(
-                child: Column(children: [
-                  TextField(
-                    controller: nameController,
-                    decoration: InputDecoration(
-                        labelText: Strings.of(context).name_title),
-                  ),
-                ]),
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    CustomTextField(
+                      controller: nameController,
+                      decoration: InputDecoration(
+                          labelText: Strings.of(context).name_title),
+                    ),
+                  ],
+                ),
               ),
               Row(
                 children: [

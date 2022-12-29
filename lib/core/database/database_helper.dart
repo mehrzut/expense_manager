@@ -44,7 +44,9 @@ class DataBaseHelper {
             try {
               db.execute(
                   "ALTER TABLE ${_expensesTable.tableName} RENAME COLUMN ${ExpensesTable.columnDate} TEXT");
-            } catch (e) {}
+            } catch (e) {
+              log(e.toString());
+            }
           }
         }
       },

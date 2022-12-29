@@ -1,10 +1,10 @@
-
 import 'package:expense_manager/common/app_routes.dart';
 import 'package:expense_manager/core/extensions/extensions.dart';
 import 'package:expense_manager/features/people/domain/entities/person_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../common/app_strings.dart';
+import '../../../../core/presentation/custom_textfield.dart';
 import '../bloc/create_person_bloc.dart';
 import '../bloc/people_bloc.dart';
 
@@ -16,7 +16,7 @@ class AddPersonPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text(Strings.of(context).add_person_title),
+        title: Text(Strings.of(context).add_person_title),
       ),
       body: BlocListener<CreatePersonBloc, CreatePersonState>(
         listener: (context, state) {
@@ -32,12 +32,16 @@ class AddPersonPage extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                child: Column(children: [
-                  TextField(
-                    controller: nameController,
-                    decoration:  InputDecoration(labelText: Strings.of(context).name_title),
-                  ),
-                ]),
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    CustomTextField(
+                      controller: nameController,
+                      decoration: InputDecoration(
+                          labelText: Strings.of(context).name_title),
+                    ),
+                  ],
+                ),
               ),
               Row(
                 children: [
@@ -46,7 +50,7 @@ class AddPersonPage extends StatelessWidget {
                       onPressed: () {
                         _createPersonHandler(context);
                       },
-                      child:  Padding(
+                      child: Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Text(Strings.of(context).submit_title),
                       ),

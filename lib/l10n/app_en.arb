@@ -24,5 +24,6 @@
     "edit_person_error_message":"Couldn't edit person! try again.",
     "name_title":"Name",
     "add_person_title":"Add Person",
+    "edit_person_title":"Edit Person",
     "date_title":"Date"
 }

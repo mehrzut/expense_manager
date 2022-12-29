@@ -1,11 +1,12 @@
 import 'package:expense_manager/common/app_strings.dart';
 import 'package:expense_manager/core/extensions/extensions.dart';
+import 'package:expense_manager/features/expenses/domain/entities/expense_entity.dart';
 import 'package:expense_manager/features/expenses/presentation/bloc/person_expense_bloc.dart';
 import 'package:expense_manager/features/people/domain/entities/person_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../common/app_routes.dart';
-import '../../../../core/enums/enums.dart';
+import '../widgets/person_expense_item.dart';
 
 class PersonExpensePage extends StatefulWidget {
   const PersonExpensePage({super.key, required this.personEntity});
@@ -64,29 +65,13 @@ class _PersonExpensePageState extends State<PersonExpensePage> {
             ),
             loaded: (expenses) => expenses.isNotEmpty
                 ? ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    padding:
+                        const EdgeInsetsDirectional.only(top: 12, bottom: 72),
                     itemCount: expenses.length,
-                    itemBuilder: (context, index) => Opacity(
-                      opacity: expenses[index].isPaid == 1 ? 0.4 : 1,
-                      child: Card(
-                        child: ListTile(
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, AppRoutes.expenseDetail,
-                                arguments: expenses[index]);
-                          },
-                          title: Text(
-                              '${expenses[index].description} - ${expenses[index].personName ?? ''}'),
-                          trailing: Text(
-                            '${expenses[index].price.toStringAsFixed(0).threeDigit} ${Strings.of(context).currency_symbol}',
-                            style: TextStyle(
-                              color: expenses[index].expenseType ==
-                                      ExpenseType.credit
-                                  ? Colors.green
-                                  : Colors.red,
-                            ),
-                          ),
-                        ),
-                      ),
+                    itemBuilder: (context, index) => PersonExpenseItem(
+                      expense: expenses[index],
+                      onTap: _onExpenseClick,
                     ),
                   )
                 : Center(
@@ -130,5 +115,9 @@ class _PersonExpensePageState extends State<PersonExpensePage> {
       AppRoutes.editPerson,
       arguments: widget.personEntity,
     );
+  }
+
+  _onExpenseClick(ExpenseEntity expense) {
+    Navigator.pushNamed(context, AppRoutes.expenseDetail, arguments: expense);
   }
 }
