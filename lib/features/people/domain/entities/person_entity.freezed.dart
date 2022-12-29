@@ -23,6 +23,7 @@ mixin _$PersonEntity {
   @JsonKey(name: '_id')
   int? get id => throw _privateConstructorUsedError;
   String get displayName => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
   double? get totalAmount => throw _privateConstructorUsedError;
   String? get cardNumber => throw _privateConstructorUsedError;
 
@@ -41,7 +42,7 @@ abstract class $PersonEntityCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: '_id') int? id,
       String displayName,
-      double? totalAmount,
+      @JsonKey(ignore: true) double? totalAmount,
       String? cardNumber});
 }
 
@@ -95,7 +96,7 @@ abstract class _$$_PersonEntityCopyWith<$Res>
   $Res call(
       {@JsonKey(name: '_id') int? id,
       String displayName,
-      double? totalAmount,
+      @JsonKey(ignore: true) double? totalAmount,
       String? cardNumber});
 }
 
@@ -142,7 +143,7 @@ class _$_PersonEntity extends _PersonEntity {
   _$_PersonEntity(
       {@JsonKey(name: '_id') this.id,
       required this.displayName,
-      this.totalAmount,
+      @JsonKey(ignore: true) this.totalAmount,
       this.cardNumber})
       : super._();
 
@@ -155,6 +156,7 @@ class _$_PersonEntity extends _PersonEntity {
   @override
   final String displayName;
   @override
+  @JsonKey(ignore: true)
   final double? totalAmount;
   @override
   final String? cardNumber;
@@ -201,7 +203,7 @@ abstract class _PersonEntity extends PersonEntity {
   factory _PersonEntity(
       {@JsonKey(name: '_id') final int? id,
       required final String displayName,
-      final double? totalAmount,
+      @JsonKey(ignore: true) final double? totalAmount,
       final String? cardNumber}) = _$_PersonEntity;
   _PersonEntity._() : super._();
 
@@ -214,6 +216,7 @@ abstract class _PersonEntity extends PersonEntity {
   @override
   String get displayName;
   @override
+  @JsonKey(ignore: true)
   double? get totalAmount;
   @override
   String? get cardNumber;

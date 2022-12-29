@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:expense_manager/core/database/people_table.dart';
 import 'package:expense_manager/features/expenses/domain/entities/expense_entity.dart';
 import 'package:expense_manager/features/people/domain/entities/person_entity.dart';
@@ -37,9 +39,13 @@ class DataBaseHelper {
         }
       },
       onUpgrade: (db, oldVersion, newVersion) {
-        if ( newVersion > oldVersion) {
-          db.execute(
-              "ALTER TABLE ${_expensesTable.tableName} ADD COLUMN ${ExpensesTable.columnDate} TEXT");
+        if (newVersion > oldVersion) {
+          if (oldVersion == 1) {
+            try {
+              db.execute(
+                  "ALTER TABLE ${_expensesTable.tableName} RENAME COLUMN ${ExpensesTable.columnDate} TEXT");
+            } catch (e) {}
+          }
         }
       },
     );
@@ -62,7 +68,17 @@ class DataBaseHelper {
       _peopleTable.update(_db, person);
 
   //! Expenses Table
-  Future<List<ExpenseEntity>> getAllExpenses() => _expensesTable.getAll(_db);
+  Future<List<ExpenseEntity>> getAllExpenses() async {
+    final people = await getAllPeople();
+    List<ExpenseEntity> expenses = await _expensesTable.getAll(_db);
+    return expenses
+        .map((e) => e.copyWith(
+            personName: people
+                .firstWhere((person) => person.id == e.personId,
+                    orElse: () => PersonEntity(displayName: ''))
+                .displayName))
+        .toList();
+  }
 
   Future<ExpenseEntity?> getExpense(int expenseId) =>
       _expensesTable.getById(_db, expenseId);

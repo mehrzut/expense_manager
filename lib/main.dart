@@ -7,8 +7,10 @@ import 'package:expense_manager/features/expenses/presentation/pages/add_expense
 import 'package:expense_manager/features/expenses/presentation/pages/expense_detail_page.dart';
 import 'package:expense_manager/features/home/presentation/pages/home_page.dart';
 import 'package:expense_manager/features/people/domain/entities/person_entity.dart';
+import 'package:expense_manager/features/people/presentation/bloc/edit_person_bloc.dart';
 import 'package:expense_manager/features/people/presentation/bloc/people_bloc.dart';
 import 'package:expense_manager/features/people/presentation/pages/add_person_page.dart';
+import 'package:expense_manager/features/people/presentation/pages/edit_person_page.dart';
 import 'package:expense_manager/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_manager/l10n/l10n.dart';
@@ -60,8 +62,8 @@ class MyApp extends StatelessWidget {
                     create: (context) => getIt(),
                   ),
                 ],
-                child:  AddExpensePage(
-                     personEntity: ModalRoute.of(context)!.settings.arguments
+                child: AddExpensePage(
+                  personEntity: ModalRoute.of(context)!.settings.arguments
                       as PersonEntity?,
                 ),
               ),
@@ -78,8 +80,7 @@ class MyApp extends StatelessWidget {
                     expenseEntity: ModalRoute.of(context)!.settings.arguments
                         as ExpenseEntity),
               ),
-          AppRoutes.addPerson: (context) => AddPersonPage(
-          ),
+          AppRoutes.addPerson: (context) => AddPersonPage(),
           AppRoutes.personExpense: (context) => BlocProvider<PersonExpenseBloc>(
                 create: (context) => getIt(),
                 child: PersonExpensePage(
@@ -87,6 +88,17 @@ class MyApp extends StatelessWidget {
                       as PersonEntity,
                 ),
               ),
+          AppRoutes.editPerson: (context) => MultiBlocProvider(
+                providers: [
+                  BlocProvider<EditPersonBloc>(
+                    create: (context) => getIt(),
+                  ),
+                ],
+                child: EditPersonPage(
+                  personEntity: (ModalRoute.of(context)?.settings.arguments
+                      as PersonEntity),
+                ),
+              )
         },
       ),
     );

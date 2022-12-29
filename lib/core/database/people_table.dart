@@ -41,6 +41,9 @@ class PeopleTable implements DataBaseTable<PersonEntity> {
 
   @override
   Future<void> update(Database db, PersonEntity data) {
-    return db.update(tableName, data.toJsonWithoutNull());
+    Map<String, dynamic> map = data.toJsonWithoutNull();
+    map.remove('_id');
+    return db
+        .update(tableName, map, where: '$columnId = ?', whereArgs: [data.id]);
   }
 }

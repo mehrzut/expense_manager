@@ -27,6 +27,14 @@ class _PersonExpensePageState extends State<PersonExpensePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.personEntity.displayName),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.edit),
+            onPressed: () {
+              _onEditPersonClick();
+            },
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
@@ -114,5 +122,13 @@ class _PersonExpensePageState extends State<PersonExpensePage> {
     context
         .read<PersonExpenseBloc>()
         .add(PersonExpenseEvent.get(widget.personEntity.id ?? 0));
+  }
+
+  void _onEditPersonClick() {
+    Navigator.pushNamed(
+      context,
+      AppRoutes.editPerson,
+      arguments: widget.personEntity,
+    );
   }
 }

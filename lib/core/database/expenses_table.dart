@@ -17,7 +17,7 @@ class ExpensesTable implements DataBaseTable<ExpenseEntity> {
   @override
   Future<void> create(Database db) async {
     return await db.execute(
-        'CREATE TABLE $tableName ($columnId INTEGER PRIMARY KEY AUTOINCREMENT, $columnDescription TEXT, $columnPrice REAL, $columnPersonName TEXT, $columnExpenseType TEXT, $columnPersonId INTEGER, $columnIsPaid INTEGER, $columnDate TEXT)');
+        'CREATE TABLE $tableName ($columnId INTEGER PRIMARY KEY AUTOINCREMENT, $columnDescription TEXT, $columnPrice REAL, $columnExpenseType TEXT, $columnPersonId INTEGER, $columnIsPaid INTEGER, $columnDate TEXT)');
   }
 
   @override

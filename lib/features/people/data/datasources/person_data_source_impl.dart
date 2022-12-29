@@ -33,7 +33,8 @@ class PersonDataSourceImpl implements PersonDataSource {
   calculateAmount(int? id, List<ExpenseEntity> allExpenses) {
     if (id == null) return 0;
     double total = 0;
-    final expenses = allExpenses.where((element) => element.personId == id).toList();
+    final expenses =
+        allExpenses.where((element) => element.personId == id).toList();
     for (ExpenseEntity expense in expenses) {
       if (expense.isPaid == 0) {
         if (expense.expenseType == ExpenseType.credit) {
@@ -44,5 +45,10 @@ class PersonDataSourceImpl implements PersonDataSource {
       }
     }
     return total;
+  }
+
+  @override
+  Future<void> updatePerson(PersonEntity person) {
+    return dataBaseHelper.updatePerson(person);
   }
 }

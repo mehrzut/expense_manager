@@ -9,7 +9,7 @@ abstract class PersonEntity with _$PersonEntity {
   factory PersonEntity({
     @JsonKey(name: '_id') int? id,
     required String displayName,
-    double? totalAmount,
+    @JsonKey(ignore: true) double? totalAmount,
     String? cardNumber,
   }) = _PersonEntity;
 

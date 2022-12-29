@@ -6,4 +6,6 @@ abstract class PersonDataSource {
   Future<void> createPerson(PersonEntity person);
 
   Future<void> deletePerson(PersonEntity person);
+
+  Future<void> updatePerson(PersonEntity person);
 }

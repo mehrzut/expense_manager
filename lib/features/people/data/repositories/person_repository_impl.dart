@@ -22,4 +22,9 @@ class PersonRepositoryImpl implements PersonRepository {
   Future<void> deletePerson(PersonEntity person) {
     return dataSource.deletePerson(person);
   }
+
+  @override
+  Future<void> editPerson(PersonEntity person) {
+    return dataSource.updatePerson(person);
+  }
 }
