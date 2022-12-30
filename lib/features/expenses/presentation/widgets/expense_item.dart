@@ -1,6 +1,7 @@
 import 'package:expense_manager/common/app_colors.dart';
 import 'package:expense_manager/common/app_text_styles.dart';
 import 'package:expense_manager/core/extensions/extensions.dart';
+import 'package:expense_manager/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../common/app_strings.dart';
@@ -18,44 +19,55 @@ class ExpenseItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(
-      opacity: expense.isPaid == 1 ? 0.4 : 1,
-      child: Container(
-        margin: const EdgeInsets.symmetric(
-          horizontal: 24,
-          vertical: 8,
-        ),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
-            boxShadow: const [
-              BoxShadow(
-                blurRadius: 12,
-                offset: Offset(0, 8),
-                color: Colors.black12,
-              )
-            ],
-            color: AppColors.white),
-        child: InkWell(
+    return Container(
+      margin: const EdgeInsets.symmetric(
+        horizontal: 24,
+        vertical: 8,
+      ),
+      decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
-          onTap: () => onTap(expense),
-          child: ListTile(
-            title: Text(
-              expense.description,
-              style: AppTextStyle.cardTitleTextStyle,
-            ),
-            subtitle: Text(
-              expense.personName ?? '',
-              style: AppTextStyle.cardSubtitleTextStyle,
-            ),
-            trailing: Text(
-              '${expense.price.toStringAsFixed(0).threeDigit} ${Strings.of(context).currency_symbol}',
-              style: AppTextStyle.amountTextStyle.copyWith(
-                color: expense.expenseType == ExpenseType.credit
-                    ? AppColors.green
-                    : AppColors.red,
+          boxShadow: const [
+            BoxShadow(
+              blurRadius: 12,
+              offset: Offset(0, 8),
+              color: Colors.black12,
+            )
+          ],
+          color: AppColors.white),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(4),
+        onTap: () => onTap(expense),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            ListTile(
+              title: Text(
+                expense.description,
+                style: AppTextStyle.cardTitleTextStyle,
+              ),
+              subtitle: Text(
+                expense.personName ?? '',
+                style: AppTextStyle.cardSubtitleTextStyle,
+              ),
+              trailing: Text(
+                '${expense.price.toStringAsFixed(0).threeDigit} ${Strings.of(context).currency_symbol}',
+                style: AppTextStyle.amountTextStyle.copyWith(
+                  color: expense.expenseType == ExpenseType.credit
+                      ? AppColors.green
+                      : AppColors.red,
+                ),
               ),
             ),
-          ),
+            Visibility(
+              visible: expense.isPaid == 1,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Opacity(
+                    opacity: 0.5,
+                    child: Assets.images.scratchy.svg(height: 50)),
+              ),
+            ),
+          ],
         ),
       ),
     );

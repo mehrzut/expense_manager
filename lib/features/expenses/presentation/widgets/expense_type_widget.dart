@@ -4,6 +4,7 @@ import 'package:expense_manager/core/enums/enums.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../common/app_strings.dart';
+import '../../../../core/utils/durations.dart';
 
 class ExpenseTypeWidget extends StatelessWidget {
   const ExpenseTypeWidget(
@@ -30,6 +31,7 @@ class ExpenseTypeWidget extends StatelessWidget {
           _TypeButton(
             borderRadius: const BorderRadius.horizontal(
               left: Radius.circular(4),
+              right: Radius.circular(4),
             ),
             text: Strings.of(context).debt_title,
             isSelected: selectedType == ExpenseType.debt,
@@ -42,6 +44,7 @@ class ExpenseTypeWidget extends StatelessWidget {
           _TypeButton(
             borderRadius: const BorderRadius.horizontal(
               right: Radius.circular(4),
+              left: Radius.circular(4),
             ),
             text: Strings.of(context).credit_title,
             isSelected: selectedType == ExpenseType.credit,
@@ -79,7 +82,8 @@ class _TypeButton extends StatelessWidget {
       child: InkWell(
         borderRadius: borderRadius,
         onTap: onTap,
-        child: Container(
+        child: AnimatedContainer(
+          duration: Durations.animationDuration,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           decoration: BoxDecoration(
             color: isSelected ? backgroundColor : AppColors.white,

@@ -68,11 +68,12 @@ extension ScaffoldMessengerStateExtension on ScaffoldMessengerState {
 
 extension StringExtensions on String {
   String get threeDigit {
-    String t = this;
+    final sign = startsWith('-') ? '-' : '';
+    String t = replaceAll('-', '');
     for (int i = 1; i * 4 <= t.length; i++) {
-      t = t.insert(length - (i * 3), ',');
+      t = t.insert(t.length - (i * 3), ',');
     }
-    return t;
+    return "$sign$t";
   }
 
   String insert(int index, String text) {

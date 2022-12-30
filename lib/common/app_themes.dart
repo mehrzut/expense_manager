@@ -24,9 +24,9 @@ class AppThemes {
       brightness: Brightness.light,
       scaffoldBackgroundColor: AppColors.scaffoldColor,
       textSelectionTheme: TextSelectionThemeData(
-        cursorColor: AppColors.primary,
-        selectionColor: AppColors.primary.withOpacity(0.1),
-        selectionHandleColor: AppColors.primary,
+        cursorColor: AppColors.secondary,
+        selectionColor: AppColors.secondary.withOpacity(0.2),
+        selectionHandleColor: AppColors.secondary,
       ),
       inputDecorationTheme: const InputDecorationTheme(
           focusColor: AppColors.primary,
@@ -48,6 +48,7 @@ class AppThemes {
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.white,
       ),
       appBarTheme: AppBarTheme(
           centerTitle: true,

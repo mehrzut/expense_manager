@@ -1,6 +1,7 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:expense_manager/common/app_colors.dart';
 import 'package:expense_manager/core/extensions/extensions.dart';
+import 'package:expense_manager/core/utils/durations.dart';
 import 'package:expense_manager/features/expenses/domain/entities/expense_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -216,11 +217,16 @@ class _ExpenseDetailPageState extends State<ExpenseDetailPage> {
                                     Strings.of(context).has_paid_title,
                                     style: AppTextStyle.textStyle,
                                   ),
-                                  trailing: Icon(
-                                    state.isPaid ?? false
-                                        ? Icons.check_box_rounded
-                                        : Icons.check_box_outline_blank_rounded,
-                                    color: AppColors.primary,
+                                  trailing: AnimatedSwitcher(
+                                    duration: Durations.animationDuration,
+                                    child: Icon(
+                                      key: ValueKey(state.isPaid ?? false),
+                                      state.isPaid ?? false
+                                          ? Icons.check_box_rounded
+                                          : Icons
+                                              .check_box_outline_blank_rounded,
+                                      color: AppColors.primary,
+                                    ),
                                   ),
                                 ),
                               ),

@@ -32,7 +32,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
         title: Text(Strings.of(context).app_name),
         bottom: TabBar(
           controller: tabController,
-          tabs:  [
+          tabs: [
             Tab(
               text: Strings.of(context).people_title,
             ),
@@ -43,6 +43,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
         ),
       ),
       body: TabBarView(
+        physics: const BouncingScrollPhysics(),
         controller: tabController,
         children: const [
           PeoplePage(),
