@@ -43,7 +43,7 @@ class DataBaseHelper {
           if (oldVersion == 1) {
             try {
               db.execute(
-                  "ALTER TABLE ${_expensesTable.tableName} RENAME COLUMN ${ExpensesTable.columnDate} TEXT");
+                  "ALTER TABLE ${_expensesTable.tableName} ADD COLUMN ${ExpensesTable.columnDate} TEXT");
             } catch (e) {
               log(e.toString());
             }
