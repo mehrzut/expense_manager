@@ -3,7 +3,9 @@ import 'package:expense_manager/core/extensions/extensions.dart';
 import 'package:expense_manager/features/people/domain/entities/person_entity.dart';
 import 'package:expense_manager/features/people/presentation/bloc/people_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../../../common/app_strings.dart';
 import '../bloc/create_person_bloc.dart';
 import '../widgets/person_item.dart';
@@ -36,13 +38,13 @@ class _PeoplePageState extends State<PeoplePage> {
       body: BlocListener<PeopleBloc, PeopleState>(
         listener: (context, state) {
           if (state is FailedGetAllPeople) {
-            _failedGetAllPeopleHandler(context);
+            _failedGetAllPeopleHandler();
           }
         },
         child: BlocListener<CreatePersonBloc, CreatePersonState>(
           listener: (context, creationState) {
             if (creationState is SuccessPersonCreation) {
-              getData(context);
+              getData();
             }
           },
           child: BlocBuilder<PeopleBloc, PeopleState>(
@@ -51,13 +53,19 @@ class _PeoplePageState extends State<PeoplePage> {
                 child: CircularProgressIndicator(),
               ),
               loaded: (people) => people.isNotEmpty
-                  ? ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      padding:
-                          const EdgeInsetsDirectional.only(top: 12, bottom: 72),
-                      itemCount: people.length,
-                      itemBuilder: (context, index) => PersonItem(
-                          person: people[index], onTap: _onPersonClick),
+                  ? SlidableAutoCloseBehavior(
+                      child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        padding: const EdgeInsetsDirectional.only(
+                            top: 12, bottom: 72),
+                        itemCount: people.length,
+                        itemBuilder: (context, index) => PersonItem(
+                          person: people[index],
+                          onTap: _onPersonClick,
+                          onEditClick: _onEditClick,
+                          onCardNumberCopyClick: _onCardNumberCopyClick,
+                        ),
+                      ),
                     )
                   : Center(
                       child: Text(Strings.of(context).empty_list_message),
@@ -68,7 +76,7 @@ class _PeoplePageState extends State<PeoplePage> {
                   Center(
                       child: Text(Strings.of(context).get_data_error_message)),
                   TextButton(
-                    onPressed: () => getData(context),
+                    onPressed: () => getData(),
                     child: Text(Strings.of(context).retry_title),
                   )
                 ],
@@ -81,20 +89,37 @@ class _PeoplePageState extends State<PeoplePage> {
     );
   }
 
-  void _failedGetAllPeopleHandler(BuildContext context) {
+  void _failedGetAllPeopleHandler() {
     ScaffoldMessenger.of(context).showErrorSnack(
       Strings.of(context).get_data_error_message,
       retry: () {
-        getData(context);
+        getData();
       },
     );
   }
 
-  void getData(BuildContext context) {
+  void getData() {
     context.read<PeopleBloc>().add(const PeopleEvent.getAll());
   }
 
   _onPersonClick(PersonEntity person) {
     Navigator.pushNamed(context, AppRoutes.personExpense, arguments: person);
+  }
+
+  _onEditClick(PersonEntity personEntity) {
+    Navigator.pushNamed(
+      context,
+      AppRoutes.editPerson,
+      arguments: personEntity,
+    );
+  }
+
+  _onCardNumberCopyClick(PersonEntity personEntity) async {
+    Clipboard.setData(ClipboardData(text: personEntity.cardNumber))
+        .then((value) {
+      ScaffoldMessenger.of(context).showSuccessSnack(
+        Strings.of(context).card_no_copy_message,
+      );
+    });
   }
 }

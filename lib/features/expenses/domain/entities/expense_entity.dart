@@ -12,7 +12,7 @@ abstract class ExpenseEntity with _$ExpenseEntity {
     @JsonKey(name: '_id') int? id,
     required String description,
     required double price,
-    String? personName,
+    @JsonKey(ignore: true) String? personName,
     int? personId,
     required ExpenseType expenseType,
     @Default(0) int isPaid,

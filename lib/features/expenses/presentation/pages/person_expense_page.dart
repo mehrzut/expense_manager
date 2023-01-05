@@ -30,7 +30,7 @@ class _PersonExpensePageState extends State<PersonExpensePage> {
         title: Text(widget.personEntity.displayName),
         actions: [
           IconButton(
-            icon: const Icon(Icons.edit),
+            icon: const Icon(Icons.edit_outlined),
             onPressed: () {
               _onEditPersonClick();
             },

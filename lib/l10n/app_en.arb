@@ -25,5 +25,8 @@
     "name_title":"Name",
     "add_person_title":"Add Person",
     "edit_person_title":"Edit Person",
-    "date_title":"Date"
+    "date_title":"Date",
+    "card_number_title":"Card No.",
+    "invalid_card_number_message":"Invalid Card No.",
+    "card_no_copy_message":"Card No. copied to clipboard."
 }

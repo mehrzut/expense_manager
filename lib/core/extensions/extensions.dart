@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../common/app_colors.dart';
+
 extension ScaffoldMessengerStateExtension on ScaffoldMessengerState {
   showErrorSnack(String error, {Function()? retry}) {
     showSnackBar(SnackBar(
         padding: EdgeInsets.zero,
-        backgroundColor: Colors.red,
+        backgroundColor: AppColors.lightRed,
+        behavior: SnackBarBehavior.floating,
         content: Row(
           children: [
             Expanded(
@@ -15,7 +18,10 @@ extension ScaffoldMessengerStateExtension on ScaffoldMessengerState {
                 ),
                 child: Text(
                   error,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: AppColors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
@@ -41,6 +47,7 @@ extension ScaffoldMessengerStateExtension on ScaffoldMessengerState {
 
   showAlertSnack(String alert) {
     showSnackBar(SnackBar(
+        behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.orange,
         content: Row(
           children: [
@@ -54,12 +61,16 @@ extension ScaffoldMessengerStateExtension on ScaffoldMessengerState {
 
   showSuccessSnack(String message) {
     showSnackBar(SnackBar(
-        backgroundColor: Colors.green,
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: AppColors.lightGreen,
         content: Row(
           children: [
             Text(
               message,
-              style: const TextStyle(color: Colors.black),
+              style: const TextStyle(
+                color: AppColors.green,
+                fontWeight: FontWeight.bold,
+              ),
             )
           ],
         )));
@@ -78,6 +89,10 @@ extension StringExtensions on String {
 
   String insert(int index, String text) {
     return substring(0, index) + text + substring(index);
+  }
+
+  bool get isValidCardNo {
+    return isEmpty || (replaceAll(' ', '').length == 16);
   }
 }
 

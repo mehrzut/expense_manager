@@ -7,11 +7,12 @@ class PeopleTable implements DataBaseTable<PersonEntity> {
   String get tableName => 'USER_TABLE';
   static const columnId = '_id';
   static const columnDisplayName = 'displayName';
+  static const columnCardNo = 'cardNumber';
 
   @override
   Future<void> create(Database db) async {
     return await db.execute(
-        'CREATE TABLE $tableName ($columnId INTEGER PRIMARY KEY AUTOINCREMENT, $columnDisplayName TEXT)');
+        'CREATE TABLE $tableName ($columnId INTEGER PRIMARY KEY AUTOINCREMENT, $columnDisplayName TEXT, $columnCardNo Text)');
   }
 
   @override

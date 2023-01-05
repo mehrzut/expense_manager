@@ -2,6 +2,7 @@ import 'package:expense_manager/common/app_routes.dart';
 import 'package:expense_manager/core/extensions/extensions.dart';
 import 'package:expense_manager/features/people/domain/entities/person_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../common/app_strings.dart';
 import '../../../../core/presentation/custom_textfield.dart';
@@ -11,6 +12,7 @@ import '../bloc/people_bloc.dart';
 class AddPersonPage extends StatelessWidget {
   AddPersonPage({super.key});
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController cardNoController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +41,21 @@ class AddPersonPage extends StatelessWidget {
                       controller: nameController,
                       decoration: InputDecoration(
                           labelText: Strings.of(context).name_title),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    CustomTextField(
+                      controller: cardNoController,
+                      maxLength: 19,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                          labelText: Strings.of(context).card_number_title,
+                          counter: const SizedBox()),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        CardNumberFormatter(),
+                      ],
                     ),
                   ],
                 ),
@@ -82,16 +99,54 @@ class AddPersonPage extends StatelessWidget {
   }
 
   void _createPersonHandler(BuildContext context) {
-    if (nameController.text.isNotEmpty) {
+    if (nameController.text.isNotEmpty && cardNoController.text.isValidCardNo) {
       context.read<CreatePersonBloc>().add(
             CreatePersonEvent.createPerson(
-              PersonEntity(displayName: nameController.text),
+              PersonEntity(
+                displayName: nameController.text,
+                cardNumber: cardNoController.text,
+              ),
             ),
           );
-    } else {
+    } else if (nameController.text.isEmpty) {
       ScaffoldMessenger.of(context).showErrorSnack(
         Strings.of(context).empty_field_error_message,
       );
+    } else {
+      ScaffoldMessenger.of(context).showErrorSnack(
+        Strings.of(context).invalid_card_number_message,
+      );
     }
+  }
+}
+
+class CardNumberFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    var inputText = newValue.text;
+
+    if (newValue.selection.baseOffset == 0) {
+      return newValue;
+    }
+
+    var bufferString = StringBuffer();
+    for (int i = 0; i < inputText.length; i++) {
+      bufferString.write(inputText[i]);
+      var nonZeroIndexValue = i + 1;
+      if (nonZeroIndexValue % 4 == 0 && nonZeroIndexValue != inputText.length) {
+        bufferString.write(' ');
+      }
+    }
+
+    var string = bufferString.toString();
+    return newValue.copyWith(
+      text: string,
+      selection: TextSelection.collapsed(
+        offset: string.length,
+      ),
+    );
   }
 }

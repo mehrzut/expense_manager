@@ -31,7 +31,7 @@ class DataBaseHelper {
     final path = await getDatabasesPath();
     _db = await openDatabase(
       '$path/$_dbName',
-      version: 2,
+      version: 3,
       onCreate: (Database db, int version) async {
         // When creating the db, create the tables
         for (DataBaseTable table in _tables) {
@@ -44,6 +44,14 @@ class DataBaseHelper {
             try {
               db.execute(
                   "ALTER TABLE ${_expensesTable.tableName} ADD COLUMN ${ExpensesTable.columnDate} TEXT");
+            } catch (e) {
+              log(e.toString());
+            }
+          }
+          if (oldVersion == 2) {
+            try {
+              db.execute(
+                  "ALTER TABLE ${_peopleTable.tableName} ADD COLUMN ${PeopleTable.columnCardNo} TEXT");
             } catch (e) {
               log(e.toString());
             }

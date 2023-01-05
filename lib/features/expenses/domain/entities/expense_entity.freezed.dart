@@ -24,6 +24,7 @@ mixin _$ExpenseEntity {
   int? get id => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
   String? get personName => throw _privateConstructorUsedError;
   int? get personId => throw _privateConstructorUsedError;
   ExpenseType get expenseType => throw _privateConstructorUsedError;
@@ -46,7 +47,7 @@ abstract class $ExpenseEntityCopyWith<$Res> {
       {@JsonKey(name: '_id') int? id,
       String description,
       double price,
-      String? personName,
+      @JsonKey(ignore: true) String? personName,
       int? personId,
       ExpenseType expenseType,
       int isPaid,
@@ -124,7 +125,7 @@ abstract class _$$_ExpenseEntityCopyWith<$Res>
       {@JsonKey(name: '_id') int? id,
       String description,
       double price,
-      String? personName,
+      @JsonKey(ignore: true) String? personName,
       int? personId,
       ExpenseType expenseType,
       int isPaid,
@@ -195,7 +196,7 @@ class _$_ExpenseEntity extends _ExpenseEntity {
       {@JsonKey(name: '_id') this.id,
       required this.description,
       required this.price,
-      this.personName,
+      @JsonKey(ignore: true) this.personName,
       this.personId,
       required this.expenseType,
       this.isPaid = 0,
@@ -213,6 +214,7 @@ class _$_ExpenseEntity extends _ExpenseEntity {
   @override
   final double price;
   @override
+  @JsonKey(ignore: true)
   final String? personName;
   @override
   final int? personId;
@@ -272,7 +274,7 @@ abstract class _ExpenseEntity extends ExpenseEntity {
       {@JsonKey(name: '_id') final int? id,
       required final String description,
       required final double price,
-      final String? personName,
+      @JsonKey(ignore: true) final String? personName,
       final int? personId,
       required final ExpenseType expenseType,
       final int isPaid,
@@ -290,6 +292,7 @@ abstract class _ExpenseEntity extends ExpenseEntity {
   @override
   double get price;
   @override
+  @JsonKey(ignore: true)
   String? get personName;
   @override
   int? get personId;
