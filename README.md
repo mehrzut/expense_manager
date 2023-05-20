@@ -1,16 +1,10 @@
-# expense_manager
+# Expense Manager App
 
-A new Flutter project.
+Expense Manager App is a simple mobile application developed using Flutter framework. It allows you to manage expenses and keep track of credits for different people.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Add and manage people: You can add new people to the app and maintain a list of individuals.
+- Add expenses or credits: Easily record expenses or credits for each person.
+- View and edit transactions: Get an overview of all transactions and modify them if needed.
+- Calculate balances: The app automatically calculates and updates the balances for each person based on their expenses and credits.
